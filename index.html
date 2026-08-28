@@ -7,7 +7,7 @@
   
   <!-- Open Graph Meta Tags for WhatsApp & Social Sharing -->
   <meta property="og:title" content="Double the Joy, Double the Celebration | Wedding Invitation">
-  <meta property="og:description" content="You are cordially invited to celebrate the Nikah & Wedding of Faheem & Zeba and Aamir & Sharika. Dec 14 - 17, 2026. Hasanpur.">
+  <meta property="og:description" content="You are cordially invited to celebrate the Mangni Ceremony (16 Sep) and Nikah & Wedding (17 Dec 2026) of Faheem & Zeba and Aamir & Sharika. Hasanpur.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80">
 
@@ -306,7 +306,6 @@
 
   <!-- Petals Floating Effect Canvas -->
   <canvas id="petals-canvas"></canvas>
-  </header>
 
 
   <!-- =========================================================================
@@ -1157,11 +1156,13 @@
       }
 
       canvas.addEventListener('mousedown', (e) => { isDrawing = true; scratchMove(e); });
-      window.addEventListener('mousemove', scratchMove);
+      canvas.addEventListener('mousemove', scratchMove);
+      canvas.addEventListener('mouseleave', () => { isDrawing = false; });
       window.addEventListener('mouseup', () => { isDrawing = false; });
 
-      canvas.addEventListener('touchstart', (e) => { isDrawing = true; scratchMove(e); });
-      window.addEventListener('touchmove', scratchMove, { passive: false });
+      canvas.addEventListener('touchstart', (e) => { isDrawing = true; scratchMove(e); }, { passive: false });
+      canvas.addEventListener('touchmove', scratchMove, { passive: false });
+      canvas.addEventListener('touchend', () => { isDrawing = false; });
       window.addEventListener('touchend', () => { isDrawing = false; });
     }
 
@@ -1179,7 +1180,7 @@
     });
 
     // 3. COUNTDOWN TIMER
-    const targetWeddingDate = new Date("December 17, 2026 20:00:00").getTime();
+    const targetWeddingDate = new Date(2026, 11, 17, 20, 0, 0).getTime();
 
     function updateCountdown() {
       const now = new Date().getTime();
@@ -1248,7 +1249,17 @@
       const waUrl = `https://wa.me/918476831094?text=${waText}`;
       window.open(waUrl, '_blank');
 
-      alert("Thank you! Opening WhatsApp to send your RSVP to the host.");
+      // In-page success notification
+      const submitBtn = document.querySelector("#rsvp-form button[type='submit']");
+      if (submitBtn) {
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<span class="text-emerald-950 font-bold">✓ Opening WhatsApp...</span>';
+        submitBtn.classList.add("bg-gold-300");
+        setTimeout(() => {
+          submitBtn.innerHTML = originalText;
+          submitBtn.classList.remove("bg-gold-300");
+        }, 3000);
+      }
     }
 
     function shareOnWhatsApp() {
