@@ -318,7 +318,7 @@
   <!-- FLOATING MUSIC PLAYER BUTTON -->
   <div class="fixed bottom-6 right-6 z-50 flex items-center gap-3">
     <div id="music-tooltip" class="hidden sm:block text-xs bg-royal-800/90 text-gold-200 px-3 py-1.5 rounded-full border border-gold-500/30 backdrop-blur shadow-lg transition-all duration-300">
-      <span id="music-status-text">Ishq Murshid • OST</span>
+      <span id="music-status-text">BGM: Ishq Murshid</span>
     </div>
     <button id="music-btn" class="w-14 h-14 rounded-full bg-gradient-to-tr from-gold-600 via-gold-400 to-gold-200 p-[2px] shadow-2xl hover:scale-105 active:scale-95 transition-all">
       <div class="w-full h-full rounded-full bg-royal-900 flex items-center justify-center relative overflow-hidden group">
@@ -743,84 +743,6 @@
             <span>Nikah Ceremony</span>
             <span>17 Dec 2026</span>
           </div>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-
-
-  <!-- =========================================================================
-       SECTION 4.5: LOVE ANTHEM — ISHQ MURSHID (PAKISTANI DRAMA OST)
-       ========================================================================= -->
-  <section class="py-16 px-4 relative z-10 bg-royal-950/70 border-t border-gold-500/30">
-    <div class="max-w-4xl mx-auto">
-      
-      <div class="islamic-card rounded-3xl p-8 sm:p-12 text-center space-y-6 relative overflow-hidden border-2 border-gold-400/60 shadow-[0_0_35px_rgba(212,163,57,0.25)]">
-        
-        <!-- Decorative Background Glow -->
-        <div class="absolute -top-24 -left-24 w-60 h-60 bg-gold-500/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute -bottom-24 -right-24 w-60 h-60 bg-gold-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
-        <!-- Section Header -->
-        <div class="space-y-2">
-          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-500/15 border border-gold-400/40 text-gold-300 text-xs font-cinzel tracking-widest uppercase mb-2">
-            <i data-lucide="music" class="w-3.5 h-3.5 text-gold-400"></i>
-            <span>Our Wedding Love Anthem</span>
-          </div>
-          <h2 class="font-cinzelDeco text-2xl sm:text-4xl md:text-5xl font-bold gold-gradient-text">
-            Ishq Murshid
-          </h2>
-          <p class="text-xs sm:text-sm font-cinzel text-gold-300/90 tracking-wider">
-            Original Soundtrack • Ahmed Jahanzeb
-          </p>
-        </div>
-
-        <!-- Urdu Calligraphy Lyrics -->
-        <div class="py-2 border-y border-gold-500/20 max-w-2xl mx-auto space-y-3">
-          <p class="font-amiri text-2xl sm:text-3xl md:text-4xl text-gold-200 leading-relaxed dir-rtl" dir="rtl">
-            نورِ جہاں اور نورِ محبت، دونوں جڑے تجھ سے پیا۔۔۔
-          </p>
-          <p class="font-amiri text-2xl sm:text-3xl md:text-4xl text-gold-300 leading-relaxed dir-rtl" dir="rtl">
-            پاگل یا جوگی مجھ کو کہو تم، ہاں میرا عشق سب سے جدا۔۔۔
-          </p>
-        </div>
-
-        <!-- Roman English Lyrics -->
-        <div class="space-y-4 max-w-xl mx-auto py-2">
-          <div class="space-y-1">
-            <p class="font-serif italic text-lg sm:text-2xl text-sand-50 tracking-wide font-medium">
-              “ Noor-e-Jahan Aur Noor-e-Mohabbat,<br>
-              Dono Judein Tujhse Piya... ”
-            </p>
-          </div>
-          
-          <div class="flex items-center justify-center gap-3">
-            <span class="w-16 h-[1px] bg-gradient-to-r from-transparent via-gold-400/60 to-transparent"></span>
-            <i data-lucide="heart" class="w-4 h-4 text-gold-400 fill-gold-400/40 animate-pulse"></i>
-            <span class="w-16 h-[1px] bg-gradient-to-r from-transparent via-gold-400/60 to-transparent"></span>
-          </div>
-
-          <div class="space-y-1">
-            <p class="font-serif italic text-lg sm:text-2xl text-gold-200 tracking-wide font-medium">
-              “ Paagal Ya Jogi Mujhko Kaho Tum,<br>
-              Haan Mera Ishq Sabse Juda... ”
-            </p>
-          </div>
-        </div>
-
-        <!-- Audio Player Control Button -->
-        <div class="pt-4 flex flex-col items-center justify-center gap-3">
-          <button onclick="toggleMusicTrack()" id="anthem-play-btn" class="px-8 py-3.5 rounded-full bg-gradient-to-r from-gold-600 via-gold-500 to-gold-400 text-royal-950 font-cinzel font-bold text-xs uppercase tracking-widest shadow-[0_0_25px_rgba(212,163,57,0.5)] hover:scale-105 active:scale-95 transition-all flex items-center gap-2.5">
-            <i data-lucide="play" id="anthem-icon" class="w-4 h-4 fill-royal-950"></i>
-            <span id="anthem-btn-text">Play Ishq Murshid OST</span>
-          </button>
-          
-          <p class="text-[11px] font-cinzel tracking-widest text-sand-200/70">
-            Dedicated to the beautiful journey of Faheem & Zeba • Aamir & Sharika
-          </p>
         </div>
 
       </div>
@@ -1445,7 +1367,7 @@
       isPlaying = true;
       soundwave.classList.remove("hidden");
       mutedIcon.classList.add("hidden");
-      musicStatusText.innerText = "Ishq Murshid • OST";
+      musicStatusText.innerText = "BGM: Ishq Murshid";
       if (!melodyTimer) {
         melodyTimer = setInterval(() => {
           if (!isPlaying) return;
