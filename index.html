@@ -74,25 +74,47 @@
   </script>
 
   <style>
+    html {
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
+
     body {
-      background-color: #230407;
+      background-color: #1e0306;
       color: #f7f2e7;
       font-family: 'Montserrat', sans-serif;
       overflow-x: hidden;
+      touch-action: pan-y;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Mughal Theme Background Texture */
-    .mughal-tapestry-bg {
+    /* High-Performance Fixed Background Layer (Zero Scroll Repaint / 120 FPS GPU Accelerated) */
+    .mughal-fixed-bg {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -10;
       background-color: #230407;
       background-image: 
         radial-gradient(ellipse at 50% 10%, rgba(131, 20, 32, 0.45), transparent 75%),
         radial-gradient(ellipse at 50% 90%, rgba(27, 59, 64, 0.4), transparent 75%),
         linear-gradient(rgba(35, 4, 7, 0.88), rgba(20, 3, 5, 0.95)),
         url('mughal_theme.jpg');
-      background-repeat: no-repeat, no-repeat, repeat, repeat;
+      background-repeat: no-repeat, no-repeat, repeat, no-repeat;
       background-size: 100% 100%, 100% 100%, 100% 100%, cover;
-      background-attachment: scroll, scroll, scroll, fixed;
       background-position: center;
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+      will-change: transform;
+    }
+
+    /* Below-the-fold content visibility optimization */
+    .optimize-scroll {
+      content-visibility: auto;
+      contain-intrinsic-size: 1px 700px;
     }
 
     /* Gold Metallic Gradient Text */
@@ -102,19 +124,21 @@
       -webkit-text-fill-color: transparent;
     }
 
-    /* Mughal Cusped Arch Border */
+    /* Mughal Cusped Arch Border with GPU compositing */
     .mughal-arch-card {
-      background: rgba(43, 8, 12, 0.88);
-      backdrop-filter: blur(12px);
+      background: rgba(38, 7, 11, 0.94);
       border: 2px solid rgba(229, 187, 72, 0.45);
       border-radius: 36px 36px 20px 20px;
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.65), inset 0 0 35px rgba(204, 160, 46, 0.12);
-      transition: all 0.35s ease;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.65), inset 0 0 30px rgba(204, 160, 46, 0.12);
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+      backface-visibility: hidden;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     .mughal-arch-card:hover {
       border-color: rgba(229, 187, 72, 0.75);
-      box-shadow: 0 25px 55px rgba(0, 0, 0, 0.75), inset 0 0 45px rgba(204, 160, 46, 0.2);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75), inset 0 0 40px rgba(204, 160, 46, 0.2);
     }
 
     /* Antique Parchment Card */
@@ -274,7 +298,10 @@
     }
   </style>
 </head>
-<body class="selection:bg-gold-500 selection:text-crimson-950 font-sans mughal-tapestry-bg">
+<body class="selection:bg-gold-500 selection:text-crimson-950 font-sans relative">
+
+  <!-- 120 FPS GPU Accelerated Fixed Background Layer -->
+  <div class="mughal-fixed-bg"></div>
 
   <!-- PETALS FLOATING EFFECT CANVAS -->
   <canvas id="petals-canvas"></canvas>
@@ -384,7 +411,7 @@
   <!-- =========================================================================
        SECTION 1: THE ROYAL ENVELOPE (MUGHAL RUBY & GOLD OPENING)
        ========================================================================= -->
-  <section id="envelope-section" class="py-24 px-4 relative z-10 bg-crimson-950/90 border-t border-gold-400/30">
+  <section id="envelope-section" class="optimize-scroll class="py-24 px-4 relative z-10 bg-crimson-950/90 border-t border-gold-400/30">
     <div class="max-w-3xl mx-auto text-center space-y-8">
       
       <div class="space-y-2">
@@ -450,7 +477,7 @@
   <!-- =========================================================================
        SECTION 2: SCRATCH & REVEAL THE DATE (DAY, MONTH, YEAR)
        ========================================================================= -->
-  <section id="scratch-section" class="py-24 px-4 relative z-10 bg-crimson-900/80 border-t border-gold-400/30">
+  <section id="scratch-section" class="optimize-scroll class="py-24 px-4 relative z-10 bg-crimson-900/80 border-t border-gold-400/30">
     <div class="max-w-4xl mx-auto text-center space-y-8">
       
       <div class="space-y-2">
@@ -688,7 +715,7 @@
   <!-- =========================================================================
        SECTION 5: EVENT SCHEDULE & TIMELINE (ALL 4 CEREMONIES)
        ========================================================================= -->
-  <section id="events" class="py-20 px-4 relative z-10 bg-crimson-950/90 border-t border-gold-400/25">
+  <section id="events" class="optimize-scroll class="py-20 px-4 relative z-10 bg-crimson-950/90 border-t border-gold-400/25">
     <div class="max-w-6xl mx-auto space-y-16">
       
       <div class="text-center space-y-3">
@@ -930,7 +957,7 @@
   <!-- =========================================================================
        SECTION 7: RSVP FORM (WHATSAPP CONFIRMATION)
        ========================================================================= -->
-  <section id="rsvp" class="py-20 px-4 relative z-10 bg-crimson-950/95">
+  <section id="rsvp" class="optimize-scroll class="py-20 px-4 relative z-10 bg-crimson-950/95">
     <div class="max-w-2xl mx-auto space-y-8">
       
       <div class="text-center space-y-3">
@@ -1370,31 +1397,42 @@
     let width = canvas.width = window.innerWidth;
     let height = canvas.height = window.innerHeight;
 
+    let resizeTimer;
     window.addEventListener("resize", () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    });
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      }, 150);
+    }, { passive: true });
 
     const particles = [];
-    const totalParticles = 24;
+    const totalParticles = 22;
 
     for (let i = 0; i < totalParticles; i++) {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
         radius: Math.random() * 5 + 3,
-        color: Math.random() > 0.5 ? "rgba(204, 160, 46, 0.45)" : "rgba(131, 20, 32, 0.4)",
-        speedY: Math.random() * 0.9 + 0.3,
-        speedX: (Math.random() - 0.5) * 0.6,
+        color: Math.random() > 0.5 ? "rgba(204, 160, 46, 0.4)" : "rgba(131, 20, 32, 0.35)",
+        speedY: Math.random() * 0.8 + 0.3,
+        speedX: (Math.random() - 0.5) * 0.5,
         rotation: Math.random() * 360,
-        rotationSpeed: (Math.random() - 0.5) * 2,
+        rotationSpeed: (Math.random() - 0.5) * 1.8,
       });
     }
 
     function renderParticles() {
+      // Pause animation when tab is inactive to preserve device CPU & battery
+      if (document.hidden) {
+        requestAnimationFrame(renderParticles);
+        return;
+      }
+
       ctx.clearRect(0, 0, width, height);
 
-      particles.forEach(p => {
+      for (let i = 0; i < totalParticles; i++) {
+        const p = particles[i];
         p.y += p.speedY;
         p.x += Math.sin(p.y * 0.01) * p.speedX;
         p.rotation += p.rotationSpeed;
@@ -1408,11 +1446,11 @@
         ctx.translate(p.x, p.y);
         ctx.rotate((p.rotation * Math.PI) / 180);
         ctx.beginPath();
-        ctx.ellipse(0, 0, p.radius, p.radius * 1.5, 0, 0, Math.PI * 2);
+        ctx.ellipse(0, 0, p.radius, p.radius * 1.4, 0, 0, Math.PI * 2);
         ctx.fillStyle = p.color;
         ctx.fill();
         ctx.restore();
-      });
+      }
 
       requestAnimationFrame(renderParticles);
     }
