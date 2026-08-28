@@ -5,12 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Faheem & Zeba • Aamir & Sharika | Wedding Invitation</title>
   
-  <!-- Open Graph Meta Tags -->
   <meta property="og:title" content="Faheem & Zeba • Aamir & Sharika — Wedding Invitation">
-  <meta property="og:description" content="Double the Joy, Double the Celebration. You are cordially invited to celebrate our Nikah & Wedding festivities. Dec 14 - 17, 2026.">
+  <meta property="og:description" content="Double the Joy, Double the Celebration. We invite you to celebrate our Nikah & Wedding festivities. Dec 14 - 17, 2026. Hasanpur.">
   <meta property="og:type" content="website">
 
-  <!-- Google Fonts: Cormorant Garamond / Playfair & Amiri -->
+  <!-- Google Fonts: Cormorant Garamond & Amiri (Matching Video Fonts) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -32,14 +31,14 @@
             emerald: {
               950: '#031913',
               900: '#06261d',
+              850: '#082d23',
               800: '#0d382d',
-              700: '#144c3d',
             },
             ivory: {
-              50: '#fffdfa',
+              50: '#fdfbf7',
               100: '#fbf8f1',
-              200: '#f5efe1',
-              300: '#ede3cd',
+              200: '#f6f0e4',
+              300: '#eddcc5',
             },
             gold: {
               300: '#edd59e',
@@ -67,97 +66,96 @@
       overflow-x: hidden;
     }
 
-    /* Islamic Geometric Jali Lattice Pattern (Exact Match to Video) */
-    .islamic-jali-bg {
-      background-color: #052119;
-      background-image: 
-        radial-gradient(#c59b3f 0.75px, transparent 0.75px), 
-        radial-gradient(#deb867 0.75px, #052119 0.75px);
-      background-size: 24px 24px;
-      background-position: 0 0, 12px 12px;
+    /* Seamless repeating Jali background */
+    .jali-page-bg {
+      background-color: #06261d;
+      background-image: url('emerald_jali.jpg');
+      background-repeat: repeat;
+      background-size: 260px;
     }
 
-    /* Ornate Scalloped Medallion Card Border */
-    .scalloped-medallion {
-      background: #fbf8f1;
-      border: 3px double #c59b3f;
-      border-radius: 42px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 0 40px rgba(222, 184, 103, 0.15);
-      position: relative;
+    /* Soft shadow on ivory cards */
+    .card-shadow {
+      box-shadow: 0 12px 35px -5px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
-    /* Deckle paper texture simulation */
-    .paper-texture {
-      background: #fbf8f1;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-    }
-
-    /* 3D ENVELOPE FULLSCREEN COVER (EXACT MATCH TO VIDEO) */
+    /* =========================================================================
+       ENVELOPE MODAL (EXACT MATCH TO FRAME 0 OF YOUR VIDEO)
+       ========================================================================= */
     #envelope-modal {
       position: fixed;
       inset: 0;
       background-color: #052119;
+      background-image: url('emerald_jali.jpg');
+      background-repeat: repeat;
+      background-size: 260px;
       z-index: 100;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      padding: 1rem;
       transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
     }
 
-    .env-wrapper {
+    .envelope-box {
       position: relative;
-      width: 90vw;
-      max-width: 440px;
-      height: 600px;
+      width: 100%;
+      max-width: 410px;
+      height: 580px;
       max-height: 82vh;
-      background: #fbf8f1;
-      border-radius: 16px;
+      background: #fbf7ef;
+      border-radius: 18px;
       overflow: hidden;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), inset 0 0 40px rgba(222, 184, 103, 0.15);
       cursor: pointer;
+      border: 1px solid #deb867;
     }
 
-    /* Scalloped Arch on Envelope Top */
-    .env-flap-cutout {
+    /* Top Scalloped Flap */
+    .env-top-flap {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 52%;
-      background: #fbf8f1;
+      background: #fcf9f2;
       border-bottom: 2px solid #deb867;
-      clip-path: polygon(0 0, 100% 0, 100% 75%, 50% 100%, 0 75%);
+      clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
       transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
       transform-origin: top center;
       z-index: 4;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.18);
     }
 
-    /* Islamic Jali bottom on envelope */
-    .env-bottom-jali {
+    /* Bottom Arch Jali Image */
+    .env-bottom-container {
       position: absolute;
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 35%;
-      background: #06261d;
-      border-top: 3px solid #c59b3f;
-      clip-path: ellipse(75% 100% at 50% 100%);
+      height: 38%;
+      overflow: hidden;
       z-index: 3;
     }
+    .env-bottom-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: bottom center;
+    }
 
-    /* Wax Seal in Center of Envelope */
-    .wax-seal {
+    /* The Real Wax Seal */
+    .wax-seal-btn {
       position: absolute;
-      top: 48%;
+      top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 78px;
-      height: 78px;
+      width: 76px;
+      height: 76px;
       border-radius: 50%;
-      background: radial-gradient(circle at 35% 35%, #fce9b8, #c59b3f 65%, #7a5814);
-      border: 3px solid #fdf5df;
+      background: radial-gradient(circle at 35% 35%, #fff3d1, #c59b3f 65%, #7a5814);
+      border: 3px solid #fcf2d9;
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6), inset 0 2px 4px rgba(255,255,255,0.8);
       z-index: 6;
       display: flex;
@@ -168,13 +166,13 @@
       cursor: pointer;
     }
 
-    .wax-seal:hover {
+    .wax-seal-btn:hover {
       transform: translate(-50%, -50%) scale(1.08);
       box-shadow: 0 0 30px rgba(222, 184, 103, 0.9);
     }
 
     /* Scratch Canvas */
-    .scratch-container {
+    .scratch-wrapper {
       position: relative;
       touch-action: none;
       user-select: none;
@@ -201,57 +199,90 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 15;
+      z-index: 20;
     }
+
+    /* Audio Equalizer animation */
+    @keyframes barPulse {
+      0%, 100% { height: 4px; }
+      50% { height: 18px; }
+    }
+    .eq-1 { animation: barPulse 0.8s ease-in-out infinite; }
+    .eq-2 { animation: barPulse 1.2s ease-in-out infinite 0.2s; }
+    .eq-3 { animation: barPulse 0.9s ease-in-out infinite 0.4s; }
   </style>
 </head>
-<body class="selection:bg-gold-400 selection:text-emerald-950 font-sans">
+<body class="selection:bg-gold-400 selection:text-emerald-950 font-sans jali-page-bg">
 
   <!-- PETALS CANVAS -->
   <canvas id="petals-canvas"></canvas>
 
+  <!-- FLOATING MUSIC BUTTON (BOTTOM RIGHT) -->
+  <div class="fixed bottom-5 right-5 z-40">
+    <button id="music-btn" class="w-12 h-12 rounded-full bg-ivory-100 border border-gold-400/80 shadow-xl flex items-center justify-center text-emerald-950 hover:scale-105 transition-all">
+      <div id="soundwave" class="flex items-center gap-[2px] h-5">
+        <span class="w-1 bg-emerald-900 rounded-full h-2 eq-1"></span>
+        <span class="w-1 bg-emerald-900 rounded-full h-3 eq-2"></span>
+        <span class="w-1 bg-emerald-900 rounded-full h-2 eq-3"></span>
+      </div>
+      <i data-lucide="volume-x" id="muted-icon" class="w-5 h-5 text-emerald-950 hidden"></i>
+    </button>
+  </div>
+
+  <!-- FLOATING TOP BAR -->
+  <div class="fixed top-4 right-4 z-40 flex items-center gap-2">
+    <button onclick="reopenEnvelope()" class="px-3.5 py-1.5 rounded-full bg-ivory-100/95 border border-gold-400 text-emerald-950 hover:bg-gold-300 text-xs font-serif flex items-center gap-1.5 shadow-md transition-all">
+      <i data-lucide="mail" class="w-3.5 h-3.5 text-gold-600"></i>
+      <span>Replay Envelope</span>
+    </button>
+    <button onclick="shareOnWhatsApp()" class="p-2 rounded-full bg-ivory-100/95 border border-gold-400 text-emerald-950 hover:bg-gold-300 shadow-md transition-all" title="Share Invitation">
+      <i data-lucide="share-2" class="w-4 h-4 text-emerald-900"></i>
+    </button>
+  </div>
+
+
   <!-- =========================================================================
-       1. SCREEN 1: ENVELOPE MODAL (MATCHES FRAME 0 TO 2 OF YOUR VIDEO)
+       1. SCREEN 1: ENVELOPE MODAL (MATCHES EXACT FRAME 0 FROM YOUR VIDEO)
        ========================================================================= -->
   <div id="envelope-modal">
-    <div class="env-wrapper" onclick="openEnvelopeVideoStyle()">
+    <div class="envelope-box" onclick="openEnvelopeFromVideo()">
       
-      <!-- Top Scalloped Flap -->
-      <div class="env-flap-cutout flex items-start justify-center pt-8">
-        <p class="font-amiri text-2xl text-gold-600 opacity-75">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+      <!-- Top Scalloped Flap with Bismillah -->
+      <div class="env-top-flap flex items-start justify-center pt-8">
+        <p class="font-amiri text-2xl text-gold-600 opacity-80">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
       </div>
 
-      <!-- Center Inner Invitation Peek -->
-      <div class="absolute inset-x-8 top-28 bottom-28 bg-ivory-100 rounded-lg p-6 text-center flex flex-col items-center justify-center border border-gold-300">
-        <span class="text-[10px] tracking-[0.25em] uppercase font-serif text-gold-600 font-semibold">Wedding Invitation</span>
+      <!-- Center Peek Card -->
+      <div class="absolute inset-x-8 top-28 bottom-28 bg-ivory-100 rounded-xl p-6 text-center flex flex-col items-center justify-center border border-gold-300">
+        <span class="text-[9px] tracking-[0.25em] uppercase font-serif text-gold-600 font-bold">Wedding Invitation</span>
         <h3 class="font-serif text-2xl font-bold text-emerald-950 my-1">Faheem & Zeba</h3>
-        <span class="font-script text-xl text-gold-500">&</span>
+        <span class="font-script text-xl text-gold-500 my-0">&</span>
         <h3 class="font-serif text-2xl font-bold text-emerald-950 my-1">Aamir & Sharika</h3>
         <p class="text-xs font-serif text-stone-600 mt-2">17 December 2026 • Hasanpur</p>
       </div>
 
-      <!-- Bottom Ornate Jali Cutout -->
-      <div class="env-bottom-jali flex items-end justify-center pb-6">
-        <span class="text-[10px] uppercase tracking-[0.3em] font-sans text-gold-300 font-medium">Rashid Qureshi Family</span>
+      <!-- Bottom Arch Image from Video -->
+      <div class="env-bottom-container">
+        <img src="envelope_bottom_arch.jpg" alt="Islamic Arch" class="env-bottom-img">
       </div>
 
-      <!-- Gold Bismillah Wax Seal in Center -->
-      <div class="wax-seal">
-        <span class="font-amiri text-sm font-bold text-emerald-950 leading-none">بِسْمِ اللهِ</span>
+      <!-- The Real Wax Seal in Center -->
+      <div class="wax-seal-btn" title="Tap to Open">
+        <span class="font-amiri text-base font-bold text-emerald-950 leading-none">بِسْمِ اللهِ</span>
         <i data-lucide="sparkles" class="w-3 h-3 text-emerald-950 mt-0.5"></i>
       </div>
 
-      <!-- "TAP TO OPEN" prompt at bottom of flap -->
+      <!-- "TAP TO OPEN" prompt -->
       <div class="absolute top-[60%] left-0 w-full text-center z-10 pointer-events-none">
-        <span class="text-[11px] uppercase tracking-[0.25em] font-sans text-stone-500 font-semibold">
+        <span class="text-[11px] uppercase tracking-[0.25em] font-sans text-stone-600 font-bold">
           TAP TO OPEN
         </span>
       </div>
 
     </div>
 
-    <div class="mt-6 text-center">
-      <button onclick="openEnvelopeVideoStyle()" class="px-8 py-3 rounded-full bg-gradient-to-r from-gold-500 via-gold-400 to-gold-500 text-emerald-950 font-sans font-bold text-xs uppercase tracking-widest shadow-[0_0_25px_rgba(222,184,103,0.6)] hover:scale-105 transition-all">
+    <div class="mt-5 text-center">
+      <button onclick="openEnvelopeFromVideo()" class="px-8 py-3 rounded-full bg-gradient-to-r from-gold-500 via-gold-400 to-gold-500 text-emerald-950 font-sans font-bold text-xs uppercase tracking-widest shadow-[0_0_25px_rgba(222,184,103,0.7)] hover:scale-105 transition-all">
         Open Invitation / लिफ़ाफ़ा खोलें
       </button>
     </div>
@@ -259,76 +290,79 @@
 
 
   <!-- =========================================================================
-       MAIN CONTENT: SCALLOPED CARD & ALL SECTIONS (EXACT VIDEO MATCH)
+       MAIN SITE CONTENT (EXACT THEME & CARDS FROM VIDEO)
        ========================================================================= -->
-  <main class="min-h-screen islamic-jali-bg py-10 px-3 sm:px-6">
+  <main class="min-h-screen py-10 px-3 sm:px-6">
     <div class="max-w-md mx-auto space-y-12">
 
       <!-- =====================================================================
-           SCREEN 2: THE ROYAL SCALLOPED CARD (FRAME 4 - 6)
+           SCREEN 2: THE REAL SCALLOPED CARD FROM VIDEO (FRAME 4 - 6)
            ===================================================================== -->
-      <section class="scalloped-medallion p-6 sm:p-8 text-center space-y-5">
-        
-        <!-- Top Caption -->
-        <p class="font-serif text-xs uppercase tracking-[0.2em] text-stone-600">
-          We invite you to celebrate our
-        </p>
+      <section class="relative w-full aspect-[580/920] rounded-3xl overflow-hidden shadow-2xl border border-gold-400/40">
+        <!-- Background: Exact Medallion Card Image from Video -->
+        <img src="medallion_card.jpg" alt="Medallion Card" class="absolute inset-0 w-full h-full object-cover">
 
-        <!-- Couple 1 Names -->
-        <div class="space-y-1">
-          <h1 class="font-serif text-3xl sm:text-4xl text-emerald-950 font-medium tracking-tight">
-            Faheem
-          </h1>
-          <p class="font-script text-2xl text-gold-500 my-0">&</p>
-          <h1 class="font-serif text-3xl sm:text-4xl text-emerald-950 font-medium tracking-tight">
-            Zeba
-          </h1>
-        </div>
-
-        <!-- Double Wedding Divider -->
-        <div class="flex items-center justify-center gap-3 py-1">
-          <span class="w-8 h-[1px] bg-gold-400"></span>
-          <span class="font-serif text-xs text-gold-600 uppercase tracking-widest font-semibold">Together With</span>
-          <span class="w-8 h-[1px] bg-gold-400"></span>
-        </div>
-
-        <!-- Couple 2 Names -->
-        <div class="space-y-1">
-          <h1 class="font-serif text-3xl sm:text-4xl text-emerald-950 font-medium tracking-tight">
-            Aamir
-          </h1>
-          <p class="font-script text-2xl text-gold-500 my-0">&</p>
-          <h1 class="font-serif text-3xl sm:text-4xl text-emerald-950 font-medium tracking-tight">
-            Sharika
-          </h1>
-        </div>
-
-        <!-- Event Subtitle & Details -->
-        <div class="pt-2 border-t border-gold-300 space-y-1.5">
-          <p class="font-serif text-xs uppercase tracking-[0.25em] text-gold-600 font-bold">
-            Double Nikah & Celebration
+        <!-- Overlay Text & Buttons Positioned Exactly Inside the Medallion -->
+        <div class="relative z-10 w-full h-full flex flex-col items-center justify-between py-12 px-6 text-center">
+          
+          <!-- Top Caption -->
+          <p class="font-serif text-xs uppercase tracking-[0.2em] text-stone-600 font-medium">
+            We invite you to celebrate our
           </p>
-          <p class="font-serif text-xs uppercase tracking-widest text-stone-600">
-            THURSDAY • DECEMBER 17, 2026 • HASANPUR
-          </p>
-        </div>
 
-        <!-- Two Action Buttons (Exact Match to Video: [RSVP] [VIEW EVENTS]) -->
-        <div class="pt-4 flex items-center justify-center gap-3">
-          <a href="#rsvp" class="w-32 py-3 rounded-full bg-emerald-900 text-ivory-100 font-sans text-xs font-semibold uppercase tracking-wider shadow-md hover:bg-emerald-800 transition-all">
-            RSVP
-          </a>
-          <a href="#events" class="w-32 py-3 rounded-full bg-ivory-200 border border-gold-400/60 text-emerald-950 font-sans text-xs font-semibold uppercase tracking-wider shadow-sm hover:bg-ivory-300 transition-all">
-            View Events
-          </a>
-        </div>
+          <!-- Couples Names -->
+          <div class="space-y-1 my-auto">
+            <h1 class="font-serif text-3xl sm:text-4xl text-emerald-950 font-medium tracking-tight">
+              Faheem
+            </h1>
+            <p class="font-script text-2xl text-gold-600 my-0">&</p>
+            <h1 class="font-serif text-3xl sm:text-4xl text-emerald-950 font-medium tracking-tight">
+              Zeba
+            </h1>
 
-        <!-- Scroll Prompt -->
-        <div class="pt-4">
-          <a href="#quran-verse" class="inline-flex flex-col items-center text-stone-500 hover:text-emerald-950 transition-all">
-            <span class="text-[9px] uppercase tracking-[0.25em] font-sans">SCROLL</span>
-            <i data-lucide="chevron-down" class="w-4 h-4 mt-0.5 animate-bounce"></i>
-          </a>
+            <div class="flex items-center justify-center gap-3 py-1">
+              <span class="w-6 h-[1px] bg-gold-400"></span>
+              <span class="font-serif text-[11px] text-gold-600 uppercase tracking-widest font-semibold">Together With</span>
+              <span class="w-6 h-[1px] bg-gold-400"></span>
+            </div>
+
+            <h1 class="font-serif text-3xl sm:text-4xl text-emerald-950 font-medium tracking-tight">
+              Aamir
+            </h1>
+            <p class="font-script text-2xl text-gold-600 my-0">&</p>
+            <h1 class="font-serif text-3xl sm:text-4xl text-emerald-950 font-medium tracking-tight">
+              Sharika
+            </h1>
+
+            <div class="pt-3 space-y-1">
+              <p class="font-serif text-xs uppercase tracking-[0.25em] text-gold-600 font-bold">
+                Double Nikah & Celebration
+              </p>
+              <p class="font-serif text-xs uppercase tracking-widest text-stone-600">
+                THURSDAY • DECEMBER 17, 2026 • HASANPUR
+              </p>
+            </div>
+          </div>
+
+          <!-- Bottom Action Buttons (Exact Match to Video: [RSVP] [VIEW EVENTS]) -->
+          <div class="w-full space-y-4">
+            <div class="flex items-center justify-center gap-3">
+              <a href="#rsvp" class="w-28 py-2.5 rounded-full bg-emerald-900 text-ivory-100 font-sans text-xs font-semibold uppercase tracking-wider shadow-md hover:bg-emerald-800 transition-all">
+                RSVP
+              </a>
+              <a href="#events" class="w-32 py-2.5 rounded-full bg-ivory-100 border border-gold-400/80 text-emerald-950 font-sans text-xs font-semibold uppercase tracking-wider shadow-sm hover:bg-ivory-200 transition-all">
+                View Events
+              </a>
+            </div>
+
+            <div class="pt-2">
+              <a href="#quran-verse" class="inline-flex flex-col items-center text-stone-600 hover:text-emerald-950 transition-all">
+                <span class="text-[9px] uppercase tracking-[0.25em] font-sans font-semibold">SCROLL</span>
+                <i data-lucide="chevron-down" class="w-4 h-4 animate-bounce"></i>
+              </a>
+            </div>
+          </div>
+
         </div>
       </section>
 
@@ -336,7 +370,7 @@
       <!-- =====================================================================
            SCREEN 3: QURANIC VERSE CARD (FRAME 6 - 8)
            ===================================================================== -->
-      <section id="quran-verse" class="paper-texture rounded-3xl p-6 sm:p-8 text-center space-y-4 border border-gold-300">
+      <section id="quran-verse" class="bg-ivory-100 card-shadow rounded-3xl p-6 sm:p-8 text-center space-y-4 border border-gold-300">
         <span class="font-serif text-4xl text-gold-500 block leading-none">“</span>
         
         <p class="font-amiri text-lg sm:text-xl text-emerald-950 leading-relaxed dir-rtl" dir="rtl">
@@ -366,8 +400,8 @@
           </h2>
         </div>
 
-        <!-- Scratch Card Box -->
-        <div class="scratch-container w-full h-56 rounded-2xl overflow-hidden shadow-2xl border-2 border-gold-400/80 mx-auto">
+        <!-- Scratch Box -->
+        <div class="scratch-wrapper w-full h-56 rounded-2xl overflow-hidden card-shadow border-2 border-gold-400 mx-auto">
           
           <!-- Hidden Revealed Card Underneath -->
           <div class="w-full h-full bg-ivory-100 p-6 flex flex-col items-center justify-between text-center border border-gold-300">
@@ -382,13 +416,13 @@
             </span>
           </div>
 
-          <!-- HTML5 Canvas Scratch Coating (Gold Metallic) -->
+          <!-- Gold Scratch Canvas -->
           <canvas id="scratch-canvas" width="400" height="224"></canvas>
         </div>
 
-        <!-- "REVEAL FOR ME" Button (Exact Match to Video) -->
-        <div class="pt-2">
-          <button id="reveal-btn" onclick="revealScratchCard()" class="px-6 py-2.5 rounded-full bg-ivory-200 border border-gold-400 text-emerald-950 font-sans font-semibold text-xs uppercase tracking-wider hover:bg-gold-400 transition-all shadow-md">
+        <!-- "REVEAL FOR ME" Button -->
+        <div class="pt-1">
+          <button id="reveal-btn" onclick="revealScratchCard()" class="px-6 py-2.5 rounded-full bg-ivory-100 border border-gold-400 text-emerald-950 font-sans font-semibold text-xs uppercase tracking-wider hover:bg-gold-400 transition-all shadow-md">
             Reveal For Me
           </button>
         </div>
@@ -396,34 +430,43 @@
 
 
       <!-- =====================================================================
-           SCREEN 5: "OUR INVITATION - DEAR FAMILY & FRIENDS" (FRAME 14)
+           SCREEN 5: "OUR INVITATION - DEAR FAMILY & FRIENDS" & PHOTO BANNER (FRAME 14)
            ===================================================================== -->
-      <section class="paper-texture rounded-3xl p-6 sm:p-8 text-center space-y-4 border border-gold-300">
-        <span class="text-[10px] uppercase tracking-[0.25em] font-sans text-gold-600 font-bold block">
-          OUR INVITATION
-        </span>
-        <h2 class="font-serif text-2xl sm:text-3xl text-emerald-950 font-medium">
-          Dear Family & Friends
-        </h2>
+      <section class="space-y-4">
+        
+        <div class="bg-ivory-100 card-shadow rounded-3xl p-6 sm:p-8 text-center space-y-4 border border-gold-300">
+          <span class="text-[10px] uppercase tracking-[0.25em] font-sans text-gold-600 font-bold block">
+            OUR INVITATION
+          </span>
+          <h2 class="font-serif text-2xl sm:text-3xl text-emerald-950 font-medium">
+            Dear Family & Friends
+          </h2>
 
-        <p class="font-serif text-xs sm:text-sm text-stone-700 leading-relaxed">
-          By the grace of Allah, we joyfully invite you to be part of our double wedding celebrations for our beloved daughters. Your gracious presence, prayers, and blessings would mean the world to us as we begin this sacred new journey together.
-        </p>
+          <p class="font-serif text-xs sm:text-sm text-stone-700 leading-relaxed">
+            By the grace of Allah, we joyfully invite you to be part of our double wedding celebrations for our beloved daughters. Your gracious presence, prayers, and blessings would mean the world to us as we begin this sacred new journey together.
+          </p>
 
-        <div class="pt-3 border-t border-gold-200">
-          <p class="font-script text-2xl text-gold-600">With love,</p>
-          <p class="font-serif text-xs uppercase tracking-widest text-emerald-950 font-bold mt-1">
-            Mrs. Roshan Jahan & Mr. Muhammad Rashid Qureshi
-          </p>
-          <p class="text-[10px] text-stone-500 font-sans mt-0.5">
-            Parents of Miss Zeba Naaz & Miss Sharika Falak
-          </p>
+          <div class="pt-3 border-t border-gold-200">
+            <p class="font-script text-2xl text-gold-600">With love,</p>
+            <p class="font-serif text-xs uppercase tracking-widest text-emerald-950 font-bold mt-1">
+              Mrs. Roshan Jahan & Mr. Muhammad Rashid Qureshi
+            </p>
+            <p class="text-[10px] text-stone-500 font-sans mt-0.5">
+              Parents of Miss Zeba Naaz & Miss Sharika Falak
+            </p>
+          </div>
         </div>
+
+        <!-- REAL PHOTO BANNER FROM VIDEO (LANTERNS, VELVET, MAY ALLAH BLESS YOU BOTH) -->
+        <div class="w-full rounded-2xl overflow-hidden card-shadow border border-gold-400/50">
+          <img src="lantern_banner.jpg" alt="May Allah Bless You Both" class="w-full h-auto object-cover">
+        </div>
+
       </section>
 
 
       <!-- =====================================================================
-           SCREEN 6: EVENTS ITINERARY CARDS (FRAME 17)
+           SCREEN 6: EVENTS ITINERARY (FRAME 17)
            ===================================================================== -->
       <section id="events" class="space-y-4">
         <div class="text-center space-y-1">
@@ -438,7 +481,7 @@
         <div class="grid grid-cols-1 gap-4">
           
           <!-- Event 1: Mehndi -->
-          <div class="paper-texture rounded-2xl p-5 border border-gold-300 flex items-center justify-between">
+          <div class="bg-ivory-100 card-shadow rounded-2xl p-5 border border-gold-300 flex items-center justify-between">
             <div class="space-y-1 text-left">
               <span class="text-[9px] uppercase font-sans tracking-widest text-gold-600 font-bold block">Day 01</span>
               <h3 class="font-serif text-xl font-bold text-emerald-950">Mehndi Night</h3>
@@ -451,7 +494,7 @@
           </div>
 
           <!-- Event 2: Mandha Function -->
-          <div class="paper-texture rounded-2xl p-5 border border-gold-300 flex items-center justify-between">
+          <div class="bg-ivory-100 card-shadow rounded-2xl p-5 border border-gold-300 flex items-center justify-between">
             <div class="space-y-1 text-left">
               <span class="text-[9px] uppercase font-sans tracking-widest text-gold-600 font-bold block">Day 02</span>
               <h3 class="font-serif text-xl font-bold text-emerald-950">Mandha Function</h3>
@@ -464,9 +507,9 @@
           </div>
 
           <!-- Event 3: Nikah (Main Ceremony) -->
-          <div class="paper-texture rounded-2xl p-5 border-2 border-gold-400 bg-ivory-50 flex items-center justify-between shadow-md">
+          <div class="bg-ivory-50 card-shadow rounded-2xl p-5 border-2 border-gold-400 flex items-center justify-between">
             <div class="space-y-1 text-left">
-              <span class="text-[9px] uppercase font-sans tracking-widest text-gold-600 font-bold block">Main Event • نِكَاح</span>
+              <span class="text-[9px] uppercase font-sans tracking-widest text-gold-600 font-bold block">Main Ceremony • نِكَاح</span>
               <h3 class="font-serif text-2xl font-bold text-emerald-950">The Day Of Blessings</h3>
               <p class="text-xs font-semibold text-emerald-900">Thursday, 17 December 2026 • 8:00 PM</p>
               <p class="text-[11px] text-stone-700 font-medium">Kamal Palace, Hasanpur</p>
@@ -478,9 +521,8 @@
 
         </div>
 
-        <!-- Venue Navigation Button -->
         <div class="pt-2">
-          <a href="https://www.google.com/maps/search/?api=1&query=Kamal+Palace+Hasanpur" target="_blank" class="w-full py-3.5 rounded-2xl bg-emerald-900 border border-gold-400/50 text-ivory-100 font-sans font-semibold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg hover:bg-emerald-800 transition-all">
+          <a href="https://www.google.com/maps/search/?api=1&query=Kamal+Palace+Hasanpur" target="_blank" class="w-full py-3.5 rounded-2xl bg-emerald-900 border border-gold-400/60 text-ivory-100 font-sans font-semibold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg hover:bg-emerald-800 transition-all">
             <i data-lucide="map-pin" class="w-4 h-4 text-gold-400"></i>
             Open In Maps (Kamal Palace Hasanpur)
           </a>
@@ -491,7 +533,7 @@
       <!-- =====================================================================
            SCREEN 7: "SAVE THE DATE - COUNTING DOWN" (FRAME 17 - 18)
            ===================================================================== -->
-      <section class="paper-texture rounded-3xl p-6 sm:p-8 text-center space-y-4 border border-gold-300">
+      <section class="bg-ivory-100 card-shadow rounded-3xl p-6 sm:p-8 text-center space-y-4 border border-gold-300">
         <div class="space-y-0.5">
           <span class="text-[10px] uppercase tracking-[0.25em] font-sans text-gold-600 font-bold block">
             SAVE THE DATE
@@ -501,12 +543,10 @@
           </h2>
         </div>
 
-        <!-- Crescent Icon -->
         <div class="flex justify-center text-gold-500 py-1">
           <i data-lucide="moon" class="w-6 h-6 fill-gold-500/20"></i>
         </div>
 
-        <!-- Digits formatted with colons (Exact Match to Video) -->
         <div class="flex items-center justify-center gap-2 sm:gap-3 text-emerald-950 font-serif font-bold text-3xl sm:text-4xl">
           <div>
             <span id="c-days">00</span>
@@ -539,7 +579,7 @@
       <!-- =====================================================================
            SCREEN 8: "KINDLY RESPOND - WILL YOU JOIN US?" (FRAME 21 - 22)
            ===================================================================== -->
-      <section id="rsvp" class="paper-texture rounded-3xl p-6 sm:p-8 text-center space-y-5 border border-gold-300">
+      <section id="rsvp" class="bg-ivory-100 card-shadow rounded-3xl p-6 sm:p-8 text-center space-y-5 border border-gold-300">
         <div class="space-y-0.5">
           <span class="text-[10px] uppercase tracking-[0.25em] font-sans text-gold-600 font-bold block">
             KINDLY RESPOND
@@ -554,7 +594,6 @@
 
         <form id="rsvp-form" onsubmit="handleRSVPSubmit(event)" class="space-y-4 text-left">
           
-          <!-- Full Name -->
           <div>
             <label class="block text-[10px] uppercase tracking-wider font-sans font-semibold text-stone-600 mb-1">
               FULL NAME
@@ -562,7 +601,6 @@
             <input type="text" id="rsvp-name" required placeholder="Your name" class="w-full px-4 py-3 rounded-xl bg-ivory-50 border border-gold-300 text-stone-800 text-sm focus:outline-none focus:border-emerald-800">
           </div>
 
-          <!-- Mobile Number -->
           <div>
             <label class="block text-[10px] uppercase tracking-wider font-sans font-semibold text-stone-600 mb-1">
               MOBILE NUMBER
@@ -570,7 +608,6 @@
             <input type="tel" id="rsvp-phone" required placeholder="+91 00000 00000" class="w-full px-4 py-3 rounded-xl bg-ivory-50 border border-gold-300 text-stone-800 text-sm focus:outline-none focus:border-emerald-800">
           </div>
 
-          <!-- Attendance Radio Pills (Exact Match to Video) -->
           <div>
             <label class="block text-[10px] uppercase tracking-wider font-sans font-semibold text-stone-600 mb-1.5">
               WILL YOU ATTEND?
@@ -587,12 +624,11 @@
             </div>
           </div>
 
-          <!-- Number of Guests Pills (Exact Match to Video: 1, 2, 3, 4, 5+) -->
           <div>
             <label class="block text-[10px] uppercase tracking-wider font-sans font-semibold text-stone-600 mb-1.5">
               NUMBER OF GUESTS (INCLUDING YOU)
             </label>
-            <div class="flex items-center justify-between gap-1.5" id="guest-pills">
+            <div class="flex items-center justify-between gap-1.5">
               <button type="button" onclick="selectGuests(1)" class="guest-btn w-10 h-10 rounded-full bg-emerald-900 text-ivory-100 text-xs font-bold font-sans">1</button>
               <button type="button" onclick="selectGuests(2)" class="guest-btn w-10 h-10 rounded-full bg-ivory-200 border border-gold-300 text-emerald-950 text-xs font-bold font-sans">2</button>
               <button type="button" onclick="selectGuests(3)" class="guest-btn w-10 h-10 rounded-full bg-ivory-200 border border-gold-300 text-emerald-950 text-xs font-bold font-sans">3</button>
@@ -601,7 +637,6 @@
             </div>
           </div>
 
-          <!-- Message -->
           <div>
             <label class="block text-[10px] uppercase tracking-wider font-sans font-semibold text-stone-600 mb-1">
               MESSAGE FOR THE COUPLE (OPTIONAL)
@@ -609,7 +644,6 @@
             <textarea id="rsvp-msg" rows="2" placeholder="Leave your wishes here..." class="w-full px-4 py-2.5 rounded-xl bg-ivory-50 border border-gold-300 text-stone-800 text-sm focus:outline-none focus:border-emerald-800 resize-none"></textarea>
           </div>
 
-          <!-- Submit Button -->
           <div class="pt-2">
             <button type="submit" class="w-full py-3.5 rounded-xl bg-emerald-900 hover:bg-emerald-800 text-ivory-100 font-sans font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-lg transition-all">
               <i data-lucide="send" class="w-4 h-4 text-gold-400"></i>
@@ -636,8 +670,7 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           
-          <!-- Bride Family -->
-          <div class="paper-texture rounded-2xl p-5 border border-gold-300 text-center space-y-2">
+          <div class="bg-ivory-100 card-shadow rounded-2xl p-5 border border-gold-300 text-center space-y-2">
             <span class="text-[9px] uppercase font-sans tracking-widest text-gold-600 font-bold block">BRIDE'S FAMILY</span>
             <h4 class="font-serif text-lg font-bold text-emerald-950">Mr. Muhammad Rashid Qureshi</h4>
             <p class="text-xs text-stone-600">& Mrs. Roshan Jahan</p>
@@ -646,8 +679,7 @@
             </a>
           </div>
 
-          <!-- Grooms' Families -->
-          <div class="paper-texture rounded-2xl p-5 border border-gold-300 text-center space-y-2">
+          <div class="bg-ivory-100 card-shadow rounded-2xl p-5 border border-gold-300 text-center space-y-2">
             <span class="text-[9px] uppercase font-sans tracking-widest text-gold-600 font-bold block">GROOMS' FAMILIES</span>
             <h4 class="font-serif text-lg font-bold text-emerald-950">Qureshi Families</h4>
             <p class="text-xs text-stone-600">Naim Qureshi & Haji Kadeer Qureshi</p>
@@ -675,16 +707,15 @@
 
 
   <!-- =========================================================================
-       JAVASCRIPT LOGIC (EXACT MATCH)
+       JAVASCRIPT LOGIC
        ========================================================================= -->
   <script>
     lucide.createIcons();
 
-    // 1. OPEN ENVELOPE (VIDEO STYLE)
+    // 1. OPEN ENVELOPE MODAL
     const envelopeModal = document.getElementById("envelope-modal");
 
-    function openEnvelopeVideoStyle() {
-      // Confetti burst from envelope
+    function openEnvelopeFromVideo() {
       confetti({
         particleCount: 90,
         spread: 80,
@@ -696,9 +727,16 @@
       setTimeout(() => {
         envelopeModal.style.visibility = 'hidden';
       }, 700);
+
+      startMusic();
     }
 
-    // 2. SCRATCH CARD (A LITTLE SURPRISE)
+    function reopenEnvelope() {
+      envelopeModal.style.visibility = 'visible';
+      envelopeModal.style.opacity = '1';
+    }
+
+    // 2. SCRATCH CARD ENGINE (A LITTLE SURPRISE)
     const canvas = document.getElementById('scratch-canvas');
     const ctx = canvas.getContext('2d');
     let isDrawing = false;
@@ -709,7 +747,6 @@
       const width = canvas.width = 400;
       const height = canvas.height = 224;
 
-      // Gold Foil Diagonal Lines Gradient (Matching Video Frame 9)
       const grad = ctx.createLinearGradient(0, 0, width, height);
       grad.addColorStop(0, '#c59b3f');
       grad.addColorStop(0.25, '#fce9b8');
@@ -720,7 +757,6 @@
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, width, height);
 
-      // Add "SCRATCH HERE" text & sparkle
       ctx.fillStyle = '#4a3b18';
       ctx.font = 'bold 15px Montserrat, sans-serif';
       ctx.textAlign = 'center';
@@ -821,7 +857,7 @@
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // 4. RSVP GUEST PILLS SELECTION
+    // 4. RSVP SELECTION
     let selectedGuestCount = 1;
     function selectGuests(val) {
       selectedGuestCount = val;
@@ -853,7 +889,70 @@
       window.open(`https://wa.me/918476831094?text=${text}`, '_blank');
     }
 
-    // 5. ROSE PETALS BACKGROUND ANIMATION
+    // 5. AUDIO
+    let audioCtx = null;
+    let isPlaying = false;
+    let melodyTimer = null;
+    const musicBtn = document.getElementById("music-btn");
+    const soundwave = document.getElementById("soundwave");
+    const mutedIcon = document.getElementById("muted-icon");
+
+    const melody = [
+      261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 392.00, 329.63,
+      293.66, 329.63, 392.00, 440.00, 523.25, 587.33, 523.25, 440.00
+    ];
+    let noteIdx = 0;
+
+    function playNote(freq) {
+      if (!audioCtx || !isPlaying) return;
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.07, audioCtx.currentTime + 0.1);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.6);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 1.6);
+      } catch (e) {}
+    }
+
+    function startMusic() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      isPlaying = true;
+      soundwave.classList.remove("hidden");
+      mutedIcon.classList.add("hidden");
+      if (!melodyTimer) {
+        melodyTimer = setInterval(() => {
+          if (!isPlaying) return;
+          playNote(melody[noteIdx]);
+          noteIdx = (noteIdx + 1) % melody.length;
+        }, 550);
+      }
+    }
+
+    musicBtn.addEventListener("click", () => {
+      if (isPlaying) {
+        isPlaying = false;
+        soundwave.classList.add("hidden");
+        mutedIcon.classList.remove("hidden");
+      } else {
+        startMusic();
+      }
+    });
+
+    // 6. WHATSAPP SHARE
+    function shareOnWhatsApp() {
+      const pageUrl = window.location.href;
+      const text = `🌙 *Wedding Invitation — Double the Joy, Double the Celebration!* 💍✨%0A%0AMr. Muhammad Rashid Qureshi & Mrs. Roshan Jahan cordially invite you to the wedding of their daughters:%0A%0A1. *Mr. Faheem Qureshi & Miss Zeba Naaz*%0A2. *Mr. Aamir Qureshi & Miss Sharika Falak*%0A%0A🗓️ *Dates:* 14 - 17 December 2026%0A📍 *Venue:* Hasanpur (U.P.)%0A%0AOpen the invitation card, envelope & scratch card here:%0A${encodeURIComponent(pageUrl)}`;
+      window.open(`https://wa.me/?text=${text}`, '_blank');
+    }
+
+    // 7. GOLD PETALS EFFECT
     const pCanvas = document.getElementById("petals-canvas");
     const pCtx = pCanvas.getContext("2d");
     let pW = pCanvas.width = window.innerWidth;
@@ -865,14 +964,14 @@
     });
 
     const petals = [];
-    for (let i = 0; i < 18; i++) {
+    for (let i = 0; i < 16; i++) {
       petals.push({
         x: Math.random() * pW,
         y: Math.random() * pH,
         r: Math.random() * 4 + 3,
-        color: Math.random() > 0.5 ? "rgba(222, 184, 103, 0.4)" : "rgba(251, 248, 241, 0.25)",
-        sy: Math.random() * 0.8 + 0.4,
-        sx: (Math.random() - 0.5) * 0.6,
+        color: Math.random() > 0.5 ? "rgba(222, 184, 103, 0.35)" : "rgba(251, 248, 241, 0.2)",
+        sy: Math.random() * 0.8 + 0.3,
+        sx: (Math.random() - 0.5) * 0.5,
         rot: Math.random() * 360,
         rs: (Math.random() - 0.5) * 2,
       });
