@@ -2,7 +2,7 @@
 <html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Wedding Invitation | Faheem & Zeba • Aamir & Sharika</title>
   
   <!-- Open Graph Meta Tags for WhatsApp & Social Sharing -->
@@ -22,12 +22,16 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <!-- Canvas Confetti CDN for Envelope & Scratch Celebration -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
             royal: {
+              950: '#04130f',
               900: '#071f18', // Deep Emerald
               800: '#0b2f25',
               700: '#124436',
@@ -61,7 +65,6 @@
   </script>
 
   <style>
-    /* Custom Luxury Styling */
     body {
       background-color: #071f18;
       color: #fdfbf7;
@@ -75,8 +78,14 @@
       -webkit-text-fill-color: transparent;
     }
 
-    .gold-border-gradient {
-      border-image: linear-gradient(to right, #b48325, #fae8b4, #d4a339) 1;
+    .gold-shimmer {
+      background: linear-gradient(90deg, #d4a339 0%, #fff6db 50%, #d4a339 100%);
+      background-size: 200% auto;
+      animation: shimmer 3s linear infinite;
+    }
+
+    @keyframes shimmer {
+      to { background-position: 200% center; }
     }
 
     .islamic-card {
@@ -99,10 +108,240 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 50;
+      z-index: 40;
     }
 
-    /* Audio Pulse Animation */
+    /* =========================================
+       ENVELOPE OPENING ANIMATION STYLES
+       ========================================= */
+    #envelope-screen {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, #0b2f25 0%, #04130f 100%);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), visibility 1s;
+    }
+
+    .envelope-box {
+      position: relative;
+      width: 320px;
+      height: 220px;
+      perspective: 1000px;
+      cursor: pointer;
+      filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.8));
+    }
+
+    @media (min-width: 640px) {
+      .envelope-box {
+        width: 440px;
+        height: 300px;
+      }
+    }
+
+    /* Envelope Pocket Base */
+    .env-pocket {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #082820;
+      border: 2px solid #d4a339;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Decorative Islamic gold pattern on envelope */
+    .env-pocket::after {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 1px dashed rgba(212, 163, 57, 0.4);
+      border-radius: 4px;
+      pointer-events: none;
+    }
+
+    /* Envelope Flap (Top triangle) */
+    .env-flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 160px solid transparent;
+      border-right: 160px solid transparent;
+      border-top: 130px solid #0b382d;
+      transform-origin: top center;
+      transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 4;
+      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4));
+    }
+
+    @media (min-width: 640px) {
+      .env-flap {
+        border-left: 220px solid transparent;
+        border-right: 220px solid transparent;
+        border-top: 175px solid #0b382d;
+      }
+    }
+
+    .env-flap::before {
+      content: '';
+      position: absolute;
+      top: -128px;
+      left: -158px;
+      width: 0;
+      height: 0;
+      border-left: 158px solid transparent;
+      border-right: 158px solid transparent;
+      border-top: 128px solid transparent;
+      border-image: linear-gradient(to bottom, #d4a339, transparent) 1;
+    }
+
+    /* Envelope Bottom & Side Folds */
+    .env-bottom-folds {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 3;
+      pointer-events: none;
+    }
+    .env-left-fold {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-top: 110px solid transparent;
+      border-bottom: 110px solid transparent;
+      border-left: 160px solid #082921;
+    }
+    .env-right-fold {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 0;
+      height: 0;
+      border-top: 110px solid transparent;
+      border-bottom: 110px solid transparent;
+      border-right: 160px solid #082921;
+    }
+    .env-bottom-fold {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 160px solid transparent;
+      border-right: 160px solid transparent;
+      border-bottom: 125px solid #0b342a;
+    }
+
+    @media (min-width: 640px) {
+      .env-left-fold {
+        border-top: 150px solid transparent;
+        border-bottom: 150px solid transparent;
+        border-left: 220px solid #082921;
+      }
+      .env-right-fold {
+        border-top: 150px solid transparent;
+        border-bottom: 150px solid transparent;
+        border-right: 220px solid #082921;
+      }
+      .env-bottom-fold {
+        border-left: 220px solid transparent;
+        border-right: 220px solid transparent;
+        border-bottom: 170px solid #0b342a;
+      }
+    }
+
+    /* Inside Invitation Card preview */
+    .env-card {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      right: 15px;
+      height: 90%;
+      background: radial-gradient(circle, #0e4033, #071f18);
+      border: 2px solid #d4a339;
+      border-radius: 6px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      text-align: center;
+      transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    }
+
+    /* Royal Golden Wax Seal */
+    .wax-seal {
+      position: absolute;
+      top: 105px;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #fff6db, #d4a339 60%, #8c6115);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7), inset 0 2px 5px rgba(255,255,255,0.7), inset 0 -2px 5px rgba(0,0,0,0.5);
+      border: 2px solid #b48325;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.5s ease;
+      cursor: pointer;
+    }
+
+    @media (min-width: 640px) {
+      .wax-seal {
+        top: 145px;
+        width: 74px;
+        height: 74px;
+      }
+    }
+
+    .wax-seal:hover {
+      transform: translate(-50%, -50%) scale(1.08);
+      box-shadow: 0 0 25px rgba(212, 163, 57, 0.8);
+    }
+
+    /* State: OPENED ENVELOPE */
+    .envelope-box.opened .env-flap {
+      transform: rotateX(180deg);
+      z-index: 1;
+    }
+
+    .envelope-box.opened .wax-seal {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.3);
+      pointer-events: none;
+    }
+
+    .envelope-box.opened .env-card {
+      transform: translateY(-130px) scale(1.05);
+      z-index: 6;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9);
+    }
+
+    @media (min-width: 640px) {
+      .envelope-box.opened .env-card {
+        transform: translateY(-170px) scale(1.06);
+      }
+    }
+
+    /* Audio Equalizer Animation */
     @keyframes audioPulse {
       0%, 100% { height: 4px; }
       50% { height: 20px; }
@@ -112,20 +351,81 @@
     .bar-3 { animation: audioPulse 0.9s ease-in-out infinite 0.4s; }
     .bar-4 { animation: audioPulse 1.1s ease-in-out infinite 0.1s; }
 
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
+    /* Scratch Canvas Container */
+    .scratch-wrapper {
+      position: relative;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: none;
     }
-    ::-webkit-scrollbar-track {
-      background: #071f18;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #d4a339;
-      border-radius: 4px;
+
+    #scratch-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-radius: 1.5rem;
+      cursor: crosshair;
+      z-index: 10;
+      transition: opacity 0.5s ease;
     }
   </style>
 </head>
 <body class="relative selection:bg-gold-500 selection:text-royal-900">
+
+  <!-- =========================================================================
+       1. INTERACTIVE ENVELOPE OPENING SCREEN (First Experience for Guests)
+       ========================================================================= -->
+  <div id="envelope-screen">
+    
+    <!-- Top Invitation Monogram & Text -->
+    <div class="text-center mb-6 space-y-2">
+      <p class="font-amiri text-2xl md:text-3xl text-gold-300">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+      <span class="text-xs uppercase tracking-[0.3em] font-cinzel text-gold-400">Royal Wedding Invitation</span>
+      <h2 class="font-cinzel text-xl md:text-3xl font-bold text-sand-50">Rashid Qureshi Family</h2>
+    </div>
+
+    <!-- The 3D Royal Envelope -->
+    <div class="envelope-box" id="envelope-box" onclick="openEnvelope()">
+      <!-- Envelope Pocket Base -->
+      <div class="env-pocket"></div>
+
+      <!-- Inside Card that slides out -->
+      <div class="env-card">
+        <span class="text-[9px] sm:text-xs font-cinzel text-gold-400 uppercase tracking-widest">You Are Invited To</span>
+        <h3 class="font-cinzel text-sm sm:text-lg font-bold text-sand-50 mt-1">Double The Joy Celebration</h3>
+        <p class="font-script text-xl sm:text-2xl text-gold-300 my-1">Faheem & Zeba • Aamir & Sharika</p>
+        <span class="text-[10px] sm:text-xs font-cinzel text-gold-200">17 December 2026 • Hasanpur</span>
+        <span class="mt-2 text-[9px] uppercase tracking-widest text-gold-400 font-cinzel bg-royal-900/80 px-2 py-1 rounded border border-gold-500/30">Click to enter ✨</span>
+      </div>
+
+      <!-- Envelope Bottom & Side Folds -->
+      <div class="env-bottom-folds">
+        <div class="env-left-fold"></div>
+        <div class="env-right-fold"></div>
+        <div class="env-bottom-fold"></div>
+      </div>
+
+      <!-- Envelope Flap (Top Fold) -->
+      <div class="env-flap"></div>
+
+      <!-- Gold Wax Seal -->
+      <div class="wax-seal" title="Tap to Open">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gold-300/60 flex items-center justify-center">
+          <i data-lucide="mail-open" class="w-5 h-5 sm:w-6 sm:h-6 text-royal-950"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prompt button below envelope -->
+    <div class="mt-12 text-center space-y-3">
+      <button onclick="openEnvelope()" class="px-8 py-3.5 rounded-full bg-gradient-to-r from-gold-600 via-gold-400 to-gold-600 text-royal-950 font-cinzel font-bold text-xs uppercase tracking-widest shadow-[0_0_25px_rgba(212,163,57,0.5)] hover:scale-105 transition-all flex items-center gap-2 mx-auto animate-pulse">
+        <i data-lucide="sparkles" class="w-4 h-4"></i>
+        <span>Tap to Open Invitation / लिफ़ाफ़ा खोलें</span>
+      </button>
+      <p class="text-[11px] text-sand-200/60 font-cinzel tracking-wider">Touch the gold seal or click the button</p>
+    </div>
+  </div>
+
 
   <!-- Petals Floating Effect Canvas -->
   <canvas id="petals-canvas"></canvas>
@@ -133,39 +433,39 @@
   <!-- FLOATING MUSIC PLAYER BUTTON -->
   <div class="fixed bottom-6 right-6 z-50 flex items-center gap-3">
     <div id="music-tooltip" class="hidden sm:block text-xs bg-royal-800/90 text-gold-200 px-3 py-1.5 rounded-full border border-gold-500/30 backdrop-blur shadow-lg transition-all duration-300">
-      <span id="music-status-text">Play Royal Melodies</span>
+      <span id="music-status-text">Playing Royal Melodies</span>
     </div>
     <button id="music-btn" class="w-14 h-14 rounded-full bg-gradient-to-tr from-gold-600 via-gold-400 to-gold-200 p-[2px] shadow-2xl hover:scale-105 active:scale-95 transition-all">
       <div class="w-full h-full rounded-full bg-royal-900 flex items-center justify-center relative overflow-hidden group">
         <div id="soundwave" class="flex items-center gap-[3px] h-6">
-          <span class="w-1 bg-gold-400 rounded-full h-2"></span>
-          <span class="w-1 bg-gold-400 rounded-full h-3"></span>
-          <span class="w-1 bg-gold-400 rounded-full h-2"></span>
-          <span class="w-1 bg-gold-400 rounded-full h-4"></span>
+          <span class="w-1 bg-gold-400 rounded-full h-2 bar-1"></span>
+          <span class="w-1 bg-gold-400 rounded-full h-3 bar-2"></span>
+          <span class="w-1 bg-gold-400 rounded-full h-2 bar-3"></span>
+          <span class="w-1 bg-gold-400 rounded-full h-4 bar-4"></span>
         </div>
         <i data-lucide="volume-x" id="muted-icon" class="w-6 h-6 text-gold-300 hidden"></i>
       </div>
     </button>
   </div>
 
-  <!-- FLOATING WHATSAPP SHARE BUTTON (TOP RIGHT) -->
-  <div class="fixed top-5 right-5 z-50 flex items-center gap-2">
-    <a href="#rsvp" class="hidden md:inline-flex items-center gap-2 bg-gradient-to-r from-gold-500 to-gold-600 text-royal-900 font-cinzel font-bold text-xs uppercase tracking-widest px-5 py-2.5 rounded-full shadow-lg hover:shadow-gold-500/30 hover:scale-105 transition-all">
+  <!-- TOP BAR (REPLAY ENVELOPE & SHARE) -->
+  <div class="fixed top-4 right-4 z-40 flex items-center gap-2">
+    <button onclick="reopenEnvelope()" class="px-3.5 py-2 rounded-full bg-royal-800/80 border border-gold-500/40 text-gold-300 hover:text-white text-xs font-cinzel flex items-center gap-1.5 backdrop-blur transition-all shadow-md" title="Replay Envelope Opening">
+      <i data-lucide="mail" class="w-3.5 h-3.5"></i>
+      <span class="hidden sm:inline">Replay Envelope</span>
+    </button>
+    <a href="#rsvp" class="hidden md:inline-flex items-center gap-2 bg-gradient-to-r from-gold-500 to-gold-600 text-royal-900 font-cinzel font-bold text-xs uppercase tracking-widest px-4 py-2 rounded-full shadow-lg hover:scale-105 transition-all">
       <i data-lucide="send" class="w-3.5 h-3.5"></i>
-      RSVP Now
+      RSVP
     </a>
     <button onclick="shareOnWhatsApp()" class="p-2.5 rounded-full bg-royal-800/80 border border-gold-500/40 text-gold-300 hover:text-white hover:bg-gold-600/30 backdrop-blur transition-all shadow-md" title="Share via WhatsApp">
-      <i data-lucide="share-2" class="w-5 h-5"></i>
+      <i data-lucide="share-2" class="w-4 h-4"></i>
     </button>
   </div>
 
   <!-- HERO SECTION -->
   <header class="min-h-screen relative flex flex-col items-center justify-center text-center px-4 py-16 overflow-hidden">
-    <!-- Islamic Geometric / Arch Background Glow -->
     <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-royal-700/50 via-royal-900/90 to-royal-900 pointer-events-none"></div>
-    
-    <!-- Decorative Islamic Arches Border Top/Bottom -->
-    <div class="absolute top-0 left-0 w-full h-12 bg-repeat-x opacity-20" style="background-image: radial-gradient(circle at 10px 0, #d4a339 8px, transparent 9px); background-size: 20px 20px;"></div>
 
     <div class="relative z-10 max-w-4xl mx-auto space-y-6">
       
@@ -202,7 +502,7 @@
       <!-- Host Invitation Note -->
       <div class="max-w-2xl mx-auto px-4 py-4 rounded-xl border-y border-gold-500/30 bg-royal-800/40 backdrop-blur">
         <p class="text-xs md:text-sm text-sand-100 font-light leading-relaxed">
-          With immense gratitude to the Almighty, we cordially invite you and your family to join us in witnessing the sacred Nikah & joyous wedding festivities of our beloved daughters
+          With immense gratitude to Almighty Allah, we cordially invite you and your family to join us in witnessing the sacred Nikah & joyous wedding festivities of our beloved daughters
         </p>
         <p class="font-cinzel font-semibold text-gold-300 text-sm md:text-base mt-2 tracking-wider">
           Mrs. Roshan Jahan & Mr. Muhammad Rashid Qureshi
@@ -216,19 +516,78 @@
         <span class="flex items-center gap-1.5"><i data-lucide="map-pin" class="w-4 h-4 text-gold-400"></i> Hasanpur (U.P.)</span>
       </div>
 
-      <!-- Scroll Down Indicator -->
-      <div class="pt-8">
-        <a href="#couples" class="inline-flex flex-col items-center text-gold-400 hover:text-gold-200 transition-all animate-bounce">
-          <span class="text-[10px] uppercase font-cinzel tracking-widest mb-1">Meet The Couples</span>
-          <i data-lucide="chevron-down" class="w-5 h-5"></i>
+      <!-- Quick Links -->
+      <div class="pt-6 flex flex-wrap justify-center gap-4">
+        <a href="#scratch-card" class="px-6 py-2.5 rounded-full bg-gold-500/20 hover:bg-gold-500/30 border border-gold-400/50 text-gold-200 text-xs font-cinzel uppercase tracking-wider flex items-center gap-2 transition-all">
+          <i data-lucide="sparkle" class="w-4 h-4 text-gold-400"></i>
+          Scratch To Reveal Surprise
+        </a>
+        <a href="#events" class="px-6 py-2.5 rounded-full bg-royal-800 hover:bg-royal-700 border border-gold-500/30 text-sand-100 text-xs font-cinzel uppercase tracking-wider flex items-center gap-2 transition-all">
+          <i data-lucide="clock" class="w-4 h-4 text-gold-400"></i>
+          View Itinerary
         </a>
       </div>
 
     </div>
   </header>
 
+  <!-- =========================================================================
+       2. INTERACTIVE SCRATCH CARD SECTION (Scratch to Reveal Details)
+       ========================================================================= -->
+  <section id="scratch-card" class="py-20 px-4 relative z-10 bg-royal-950/80 border-y border-gold-500/30">
+    <div class="max-w-xl mx-auto text-center space-y-6">
+      
+      <div class="space-y-2">
+        <span class="text-gold-400 font-script text-3xl block">An Auspicious Surprise</span>
+        <h2 class="font-cinzel text-2xl md:text-3xl font-bold gold-gradient-text uppercase tracking-wider">
+          Scratch To Reveal Nikah Details ✨
+        </h2>
+        <p class="text-xs sm:text-sm text-sand-200">
+          Use your finger or mouse to scratch the gold card below and reveal the secret wedding blessings & main Nikah timing!
+        </p>
+      </div>
+
+      <!-- Scratch Card Box -->
+      <div class="scratch-wrapper w-full max-w-[360px] sm:max-w-[420px] h-[260px] sm:h-[290px] mx-auto rounded-3xl overflow-hidden islamic-card shadow-2xl border-2 border-gold-400/60 p-1">
+        
+        <!-- HIDDEN CONTENT UNDERNEATH THE SCRATCH LAYER -->
+        <div id="scratch-content" class="w-full h-full rounded-[1.4rem] bg-gradient-to-b from-royal-800 to-royal-950 p-6 flex flex-col items-center justify-between text-center border border-gold-500/40">
+          <div class="space-y-1">
+            <span class="font-amiri text-xl text-gold-300 block">مَا شَاءَ ٱللَّٰهُ</span>
+            <span class="text-[10px] uppercase font-cinzel tracking-[0.2em] text-gold-400 font-bold">Official Nikah Date & Time</span>
+          </div>
+
+          <div class="space-y-1 my-auto">
+            <h3 class="font-cinzelDeco text-2xl sm:text-3xl font-bold gold-gradient-text">17 DEC 2026</h3>
+            <p class="font-cinzel text-sm sm:text-base text-sand-50 font-semibold">Thursday • 8:00 PM Sharp</p>
+            <p class="font-script text-2xl text-gold-300">Kamal Palace, Hasanpur</p>
+            <p class="text-[11px] text-sand-200/80 font-light mt-1">Double the Nikah, Infinite Blessings!</p>
+          </div>
+
+          <div class="flex items-center gap-3 text-[10px] font-cinzel text-gold-300">
+            <span>Mehndi: 14 Dec</span>
+            <span>•</span>
+            <span>Mandha: 16 Dec</span>
+          </div>
+        </div>
+
+        <!-- HTML5 CANVAS SCRATCH OVERLAY -->
+        <canvas id="scratch-canvas" width="420" height="290"></canvas>
+      </div>
+
+      <!-- Scratch Status Indicator -->
+      <div class="flex items-center justify-center gap-4 text-xs font-cinzel text-gold-300">
+        <span id="scratch-progress-text">Scratch card with your finger: <strong>0%</strong></span>
+        <button onclick="resetScratchCard()" class="text-xs text-gold-400 hover:text-white underline font-cinzel">
+          Reset Card
+        </button>
+      </div>
+
+    </div>
+  </section>
+
   <!-- LIVE COUNTDOWN TIMER SECTION -->
-  <section class="py-12 px-4 relative z-10 bg-royal-800/50 border-y border-gold-500/20 backdrop-blur">
+  <section class="py-12 px-4 relative z-10 bg-royal-800/50 border-b border-gold-500/20 backdrop-blur">
     <div class="max-w-4xl mx-auto text-center space-y-6">
       <div class="flex items-center justify-center gap-3">
         <span class="w-12 h-[1px] bg-gradient-to-r from-transparent to-gold-400"></span>
@@ -240,22 +599,18 @@
 
       <!-- Timer Grid -->
       <div class="grid grid-cols-4 gap-3 sm:gap-6 max-w-xl mx-auto">
-        <!-- Days -->
         <div class="islamic-card p-3 sm:p-5 rounded-2xl">
           <span id="timer-days" class="block font-cinzel font-bold text-2xl sm:text-4xl md:text-5xl gold-gradient-text">00</span>
           <span class="text-[10px] sm:text-xs uppercase font-cinzel tracking-wider text-sand-200">Days</span>
         </div>
-        <!-- Hours -->
         <div class="islamic-card p-3 sm:p-5 rounded-2xl">
           <span id="timer-hours" class="block font-cinzel font-bold text-2xl sm:text-4xl md:text-5xl gold-gradient-text">00</span>
           <span class="text-[10px] sm:text-xs uppercase font-cinzel tracking-wider text-sand-200">Hours</span>
         </div>
-        <!-- Minutes -->
         <div class="islamic-card p-3 sm:p-5 rounded-2xl">
           <span id="timer-minutes" class="block font-cinzel font-bold text-2xl sm:text-4xl md:text-5xl gold-gradient-text">00</span>
           <span class="text-[10px] sm:text-xs uppercase font-cinzel tracking-wider text-sand-200">Minutes</span>
         </div>
-        <!-- Seconds -->
         <div class="islamic-card p-3 sm:p-5 rounded-2xl">
           <span id="timer-seconds" class="block font-cinzel font-bold text-2xl sm:text-4xl md:text-5xl gold-gradient-text">00</span>
           <span class="text-[10px] sm:text-xs uppercase font-cinzel tracking-wider text-sand-200">Seconds</span>
@@ -272,7 +627,6 @@
   <section id="couples" class="py-20 px-4 relative z-10">
     <div class="max-w-6xl mx-auto space-y-16">
       
-      <!-- Section Header -->
       <div class="text-center space-y-3">
         <span class="text-gold-400 font-script text-3xl md:text-4xl block">Together Forever</span>
         <h2 class="font-cinzel text-2xl md:text-4xl font-bold gold-gradient-text uppercase tracking-wider">
@@ -288,12 +642,11 @@
         </div>
       </div>
 
-      <!-- Two Couples Side by Side Cards -->
+      <!-- Two Couples Cards -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
         
         <!-- ================= COUPLE 1 CARD ================= -->
         <div class="islamic-card rounded-3xl p-6 sm:p-10 relative overflow-hidden transition-all duration-300 flex flex-col justify-between">
-          <!-- Top Badge -->
           <div class="flex justify-between items-center border-b border-gold-500/20 pb-4 mb-6">
             <span class="text-[11px] font-cinzel uppercase tracking-[0.2em] px-3 py-1 rounded-full bg-gold-500/20 text-gold-300 border border-gold-500/30">
               Couple I
@@ -301,7 +654,6 @@
             <span class="font-script text-2xl text-gold-400">Faheem & Zeba</span>
           </div>
 
-          <!-- Couple Avatar / Illustration Artwork -->
           <div class="text-center space-y-6">
             <div class="relative w-40 h-40 mx-auto rounded-full p-1 bg-gradient-to-tr from-gold-500 via-gold-200 to-gold-600 shadow-xl">
               <div class="w-full h-full rounded-full bg-royal-800 flex flex-col items-center justify-center p-4 border border-gold-500/30 overflow-hidden relative group">
@@ -311,9 +663,7 @@
               </div>
             </div>
 
-            <!-- Groom & Bride Details -->
             <div class="space-y-4">
-              <!-- Groom -->
               <div class="space-y-1">
                 <h3 class="font-cinzel text-2xl md:text-3xl font-bold text-sand-50 tracking-wide">
                   Mr. Faheem Qureshi
@@ -323,14 +673,12 @@
                 </p>
               </div>
 
-              <!-- Romantic Connector -->
               <div class="flex items-center justify-center gap-3">
                 <span class="w-10 h-[1px] bg-gold-500/30"></span>
                 <span class="font-script text-3xl text-gold-400">weds</span>
                 <span class="w-10 h-[1px] bg-gold-500/30"></span>
               </div>
 
-              <!-- Bride -->
               <div class="space-y-1">
                 <h3 class="font-cinzel text-2xl md:text-3xl font-bold text-sand-50 tracking-wide">
                   Miss. Zeba Naaz
@@ -341,7 +689,6 @@
               </div>
             </div>
 
-            <!-- Heartfelt Note for Couple 1 -->
             <div class="bg-royal-900/60 p-5 rounded-2xl border border-gold-500/20 text-left relative mt-6">
               <i data-lucide="quote" class="w-6 h-6 text-gold-500/20 absolute top-3 right-3"></i>
               <p class="text-xs sm:text-sm text-sand-100 italic leading-relaxed font-light">
@@ -350,7 +697,6 @@
             </div>
           </div>
 
-          <!-- Bottom Footer -->
           <div class="mt-8 pt-4 border-t border-gold-500/20 flex justify-between items-center text-xs text-gold-400 font-cinzel">
             <span>Nikah Ceremony</span>
             <span>17 Dec 2026</span>
@@ -359,7 +705,6 @@
 
         <!-- ================= COUPLE 2 CARD ================= -->
         <div class="islamic-card rounded-3xl p-6 sm:p-10 relative overflow-hidden transition-all duration-300 flex flex-col justify-between">
-          <!-- Top Badge -->
           <div class="flex justify-between items-center border-b border-gold-500/20 pb-4 mb-6">
             <span class="text-[11px] font-cinzel uppercase tracking-[0.2em] px-3 py-1 rounded-full bg-gold-500/20 text-gold-300 border border-gold-500/30">
               Couple II
@@ -367,7 +712,6 @@
             <span class="font-script text-2xl text-gold-400">Aamir & Sharika</span>
           </div>
 
-          <!-- Couple Avatar / Illustration Artwork -->
           <div class="text-center space-y-6">
             <div class="relative w-40 h-40 mx-auto rounded-full p-1 bg-gradient-to-tr from-gold-500 via-gold-200 to-gold-600 shadow-xl">
               <div class="w-full h-full rounded-full bg-royal-800 flex flex-col items-center justify-center p-4 border border-gold-500/30 overflow-hidden relative group">
@@ -377,9 +721,7 @@
               </div>
             </div>
 
-            <!-- Groom & Bride Details -->
             <div class="space-y-4">
-              <!-- Groom -->
               <div class="space-y-1">
                 <h3 class="font-cinzel text-2xl md:text-3xl font-bold text-sand-50 tracking-wide">
                   Mr. Aamir Qureshi
@@ -389,14 +731,12 @@
                 </p>
               </div>
 
-              <!-- Romantic Connector -->
               <div class="flex items-center justify-center gap-3">
                 <span class="w-10 h-[1px] bg-gold-500/30"></span>
                 <span class="font-script text-3xl text-gold-400">weds</span>
                 <span class="w-10 h-[1px] bg-gold-500/30"></span>
               </div>
 
-              <!-- Bride -->
               <div class="space-y-1">
                 <h3 class="font-cinzel text-2xl md:text-3xl font-bold text-sand-50 tracking-wide">
                   Miss. Sharika Falak
@@ -407,7 +747,6 @@
               </div>
             </div>
 
-            <!-- Heartfelt Note for Couple 2 -->
             <div class="bg-royal-900/60 p-5 rounded-2xl border border-gold-500/20 text-left relative mt-6">
               <i data-lucide="quote" class="w-6 h-6 text-gold-500/20 absolute top-3 right-3"></i>
               <p class="text-xs sm:text-sm text-sand-100 italic leading-relaxed font-light">
@@ -416,7 +755,6 @@
             </div>
           </div>
 
-          <!-- Bottom Footer -->
           <div class="mt-8 pt-4 border-t border-gold-500/20 flex justify-between items-center text-xs text-gold-400 font-cinzel">
             <span>Nikah Ceremony</span>
             <span>17 Dec 2026</span>
@@ -432,7 +770,6 @@
   <section id="events" class="py-20 px-4 relative z-10 bg-royal-900/70 border-t border-gold-500/20">
     <div class="max-w-5xl mx-auto space-y-16">
       
-      <!-- Section Title -->
       <div class="text-center space-y-3">
         <span class="text-gold-400 font-script text-3xl md:text-4xl block">Join Our Celebrations</span>
         <h2 class="font-cinzel text-2xl md:text-4xl font-bold gold-gradient-text uppercase tracking-wider">
@@ -443,7 +780,7 @@
         </p>
       </div>
 
-      <!-- Events Grid / Timeline -->
+      <!-- Events Grid -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
         
         <!-- EVENT 1: MEHNDI -->
@@ -596,9 +933,7 @@
         </p>
       </div>
 
-      <!-- Dua Wall Display -->
       <div id="dua-wall" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-left">
-        <!-- Default Pre-filled Dua 1 -->
         <div class="bg-royal-900/80 p-4 rounded-2xl border border-gold-500/20 text-xs space-y-2">
           <div class="flex justify-between items-center text-gold-400 font-cinzel">
             <span class="font-bold">Family Elder</span>
@@ -606,7 +941,6 @@
           </div>
           <p class="text-sand-100 italic">"Mashallah, may Allah protect both couples from all evil eyes and fill their homes with barkat, joy, and peace."</p>
         </div>
-        <!-- Default Pre-filled Dua 2 -->
         <div class="bg-royal-900/80 p-4 rounded-2xl border border-gold-500/20 text-xs space-y-2">
           <div class="flex justify-between items-center text-gold-400 font-cinzel">
             <span class="font-bold">Qureshi Family</span>
@@ -614,7 +948,6 @@
           </div>
           <p class="text-sand-100 italic">"Heartiest congratulations to our dearest daughters Zeba & Sharika, and welcome to Faheem & Aamir into the family!"</p>
         </div>
-        <!-- Default Pre-filled Dua 3 -->
         <div class="bg-royal-900/80 p-4 rounded-2xl border border-gold-500/20 text-xs space-y-2">
           <div class="flex justify-between items-center text-gold-400 font-cinzel">
             <span class="font-bold">Well Wishers</span>
@@ -630,7 +963,6 @@
   <section id="rsvp" class="py-20 px-4 relative z-10">
     <div class="max-w-2xl mx-auto space-y-10">
       
-      <!-- RSVP Title -->
       <div class="text-center space-y-3">
         <span class="text-gold-400 font-script text-3xl md:text-4xl block">Will You Join Us?</span>
         <h2 class="font-cinzel text-2xl md:text-4xl font-bold gold-gradient-text uppercase tracking-wider">
@@ -645,7 +977,6 @@
       <div class="islamic-card p-6 sm:p-10 rounded-3xl relative">
         <form id="rsvp-form" onsubmit="handleRSVPSubmit(event)" class="space-y-6">
           
-          <!-- Guest Name -->
           <div>
             <label class="block font-cinzel text-xs uppercase tracking-widest text-gold-300 mb-2">
               Your Full Name / Family Name *
@@ -656,19 +987,17 @@
             </div>
           </div>
 
-          <!-- Which Couple / Function -->
           <div>
             <label class="block font-cinzel text-xs uppercase tracking-widest text-gold-300 mb-2">
               Attending For *
             </label>
             <select id="attending-for" class="w-full px-4 py-3 rounded-xl bg-royal-900/90 border border-gold-500/30 text-sand-100 text-sm focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-all">
-              <option value="Both Couples (Dono Cupals - Grand Celebration)" selected>Both Blessed Couples (Faheem & Zeba + Aamir & Sharika)</option>
+              <option value="Both Couples (Dono Couples - Grand Celebration)" selected>Both Blessed Couples (Faheem & Zeba + Aamir & Sharika)</option>
               <option value="Couple 1 (Faheem & Zeba)">Couple 1: Faheem & Zeba</option>
               <option value="Couple 2 (Aamir & Sharika)">Couple 2: Aamir & Sharika</option>
             </select>
           </div>
 
-          <!-- Attendance Status & Guest Count in 2 columns -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label class="block font-cinzel text-xs uppercase tracking-widest text-gold-300 mb-2">
@@ -693,7 +1022,6 @@
             </div>
           </div>
 
-          <!-- Message / Dua -->
           <div>
             <label class="block font-cinzel text-xs uppercase tracking-widest text-gold-300 mb-2">
               Send Your Dua / Warm Wishes
@@ -701,7 +1029,6 @@
             <textarea id="guest-message" rows="3" placeholder="Write your heartfelt congratulations or prayer for the couples..." class="w-full px-4 py-3 rounded-xl bg-royal-900/90 border border-gold-500/30 text-sand-100 text-sm focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-all placeholder:text-sand-200/40 resize-none"></textarea>
           </div>
 
-          <!-- Submit Button: Sends via WhatsApp -->
           <div class="pt-2">
             <button type="submit" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-gold-600 via-gold-500 to-gold-400 text-royal-900 font-cinzel font-bold text-sm uppercase tracking-widest flex items-center justify-center gap-3 shadow-xl hover:shadow-gold-500/40 hover:scale-[1.01] active:scale-[0.99] transition-all">
               <i data-lucide="message-circle" class="w-5 h-5"></i>
@@ -715,7 +1042,6 @@
         </form>
       </div>
 
-      <!-- Quick Contact Info -->
       <div class="text-center space-y-4 pt-4 border-t border-gold-500/20">
         <p class="font-cinzel text-xs uppercase tracking-[0.25em] text-gold-300">
           For Any Inquiries & Assistance
@@ -750,19 +1076,260 @@
       Hasanpur, Uttar Pradesh • December 2026
     </p>
 
-    <div class="pt-6">
-      <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="inline-flex items-center gap-1.5 text-xs text-gold-400 hover:text-gold-200 font-cinzel transition-all">
-        <i data-lucide="arrow-up" class="w-4 h-4"></i> Back to Top
+    <div class="pt-6 flex justify-center gap-6 text-xs text-gold-400 font-cinzel">
+      <button onclick="reopenEnvelope()" class="hover:text-gold-200 flex items-center gap-1">
+        <i data-lucide="mail" class="w-3.5 h-3.5"></i> Open Envelope Again
+      </button>
+      <span>•</span>
+      <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="hover:text-gold-200 flex items-center gap-1">
+        <i data-lucide="arrow-up" class="w-3.5 h-3.5"></i> Back to Top
       </button>
     </div>
   </footer>
 
-  <!-- JAVASCRIPT LOGIC -->
+  <!-- =========================================================================
+       JAVASCRIPT LOGIC: ENVELOPE + SCRATCH CARD + AUDIO + COUNTDOWN
+       ========================================================================= -->
   <script>
-    // Initialize Lucide Icons
     lucide.createIcons();
 
-    // 1. COUNTDOWN TIMER TO 17 DEC 2026, 20:00:00 (8:00 PM)
+    // 1. AUDIO SYNTHESIZER
+    let audioCtx = null;
+    let isPlaying = false;
+    let melodyTimer = null;
+
+    const musicBtn = document.getElementById("music-btn");
+    const soundwave = document.getElementById("soundwave");
+    const mutedIcon = document.getElementById("muted-icon");
+    const musicStatusText = document.getElementById("music-status-text");
+
+    const melody = [
+      261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 392.00, 329.63,
+      293.66, 329.63, 392.00, 440.00, 523.25, 587.33, 523.25, 440.00
+    ];
+    let noteIndex = 0;
+
+    function playNote(freq) {
+      if (!audioCtx || !isPlaying) return;
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+        gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.08, audioCtx.currentTime + 0.1);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.6);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start();
+        osc.stop(audioCtx.currentTime + 1.6);
+      } catch (e) {}
+    }
+
+    function startMusic() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      isPlaying = true;
+      soundwave.classList.remove("hidden");
+      mutedIcon.classList.add("hidden");
+      musicStatusText.innerText = "Playing Royal Melodies";
+      if (!melodyTimer) {
+        melodyTimer = setInterval(() => {
+          if (!isPlaying) return;
+          playNote(melody[noteIndex]);
+          noteIndex = (noteIndex + 1) % melody.length;
+        }, 550);
+      }
+    }
+
+    function toggleMusic() {
+      if (isPlaying) {
+        isPlaying = false;
+        soundwave.classList.add("hidden");
+        mutedIcon.classList.remove("hidden");
+        musicStatusText.innerText = "Music Paused";
+      } else {
+        startMusic();
+      }
+    }
+
+    musicBtn.addEventListener("click", toggleMusic);
+
+    // 2. ENVELOPE OPENING LOGIC
+    const envScreen = document.getElementById("envelope-screen");
+    const envBox = document.getElementById("envelope-box");
+
+    function openEnvelope() {
+      if (envBox.classList.contains("opened")) return;
+      
+      // Start music automatically on user interaction
+      startMusic();
+
+      // Open envelope flap and slide card
+      envBox.classList.add("opened");
+
+      // Confetti burst from envelope
+      confetti({
+        particleCount: 70,
+        spread: 80,
+        origin: { y: 0.6 },
+        colors: ['#d4a339', '#fae8b4', '#1a5c4b', '#fdfbf7']
+      });
+
+      // After slide animation, fade out envelope screen and show website
+      setTimeout(() => {
+        envScreen.style.opacity = '0';
+        setTimeout(() => {
+          envScreen.style.visibility = 'hidden';
+          // Second grand celebration burst
+          confetti({
+            particleCount: 100,
+            spread: 100,
+            origin: { y: 0.4 },
+            colors: ['#d4a339', '#fae8b4', '#eec15d']
+          });
+        }, 1000);
+      }, 1600);
+    }
+
+    function reopenEnvelope() {
+      window.scrollTo({top: 0, behavior: 'smooth'});
+      envBox.classList.remove("opened");
+      envScreen.style.visibility = 'visible';
+      envScreen.style.opacity = '1';
+    }
+
+    // 3. SCRATCH CARD ENGINE (CANVAS BASED)
+    const scratchCanvas = document.getElementById('scratch-canvas');
+    const scratchCtx = scratchCanvas.getContext('2d');
+    const progressText = document.getElementById('scratch-progress-text');
+    let isDrawing = false;
+    let isRevealed = false;
+
+    function initScratchCard() {
+      isRevealed = false;
+      const rect = scratchCanvas.getBoundingClientRect();
+      scratchCanvas.width = rect.width || 360;
+      scratchCanvas.height = rect.height || 260;
+
+      // Draw Luxury Gold Glitter Texture on Canvas
+      const grad = scratchCtx.createLinearGradient(0, 0, scratchCanvas.width, scratchCanvas.height);
+      grad.addColorStop(0, '#b48325');
+      grad.addColorStop(0.3, '#fae8b4');
+      grad.addColorStop(0.5, '#d4a339');
+      grad.addColorStop(0.8, '#f4d284');
+      grad.addColorStop(1, '#8c6115');
+
+      scratchCtx.fillStyle = grad;
+      scratchCtx.fillRect(0, 0, scratchCanvas.width, scratchCanvas.height);
+
+      // Add decorative frame and text on top of scratch card
+      scratchCtx.strokeStyle = 'rgba(7, 31, 24, 0.4)';
+      scratchCtx.lineWidth = 4;
+      scratchCtx.strokeRect(15, 15, scratchCanvas.width - 30, scratchCanvas.height - 30);
+
+      scratchCtx.fillStyle = '#071f18';
+      scratchCtx.font = 'bold 15px Montserrat, sans-serif';
+      scratchCtx.textAlign = 'center';
+      scratchCtx.fillText('✨ SCRATCH HERE TO REVEAL ✨', scratchCanvas.width / 2, scratchCanvas.height / 2 - 10);
+      
+      scratchCtx.font = '12px Montserrat, sans-serif';
+      scratchCtx.fillText('Touch & Rub to Reveal Nikah Details', scratchCanvas.width / 2, scratchCanvas.height / 2 + 18);
+
+      scratchCanvas.style.opacity = '1';
+      progressText.innerHTML = `Scratch card with your finger: <strong>0%</strong>`;
+    }
+
+    // Scratch coordinates handler
+    function getScratchPos(e) {
+      const rect = scratchCanvas.getBoundingClientRect();
+      let clientX, clientY;
+      if (e.touches && e.touches.length > 0) {
+        clientX = e.touches[0].clientX;
+        clientY = e.touches[0].clientY;
+      } else {
+        clientX = e.clientX;
+        clientY = e.clientY;
+      }
+      return {
+        x: clientX - rect.left,
+        y: clientY - rect.top
+      };
+    }
+
+    function scratch(e) {
+      if (!isDrawing || isRevealed) return;
+      e.preventDefault();
+
+      const pos = getScratchPos(e);
+
+      scratchCtx.globalCompositeOperation = 'destination-out';
+      scratchCtx.beginPath();
+      scratchCtx.arc(pos.x, pos.y, 24, 0, Math.PI * 2);
+      scratchCtx.fill();
+
+      checkScratchPercentage();
+    }
+
+    function checkScratchPercentage() {
+      if (isRevealed) return;
+      const step = 16;
+      const imgData = scratchCtx.getImageData(0, 0, scratchCanvas.width, scratchCanvas.height);
+      const data = imgData.data;
+      let transparentPixels = 0;
+      let totalSampled = 0;
+
+      for (let i = 3; i < data.length; i += 4 * step) {
+        totalSampled++;
+        if (data[i] === 0) {
+          transparentPixels++;
+        }
+      }
+
+      const percent = Math.round((transparentPixels / totalSampled) * 100);
+      progressText.innerHTML = `Scratch card with your finger: <strong>${percent}%</strong>`;
+
+      // When 45% scratched, auto-reveal with confetti!
+      if (percent >= 45) {
+        isRevealed = true;
+        scratchCanvas.style.opacity = '0';
+        progressText.innerHTML = `<span class="text-gold-200 font-bold">🎉 Auspicious Details Revealed! Mubarak!</span>`;
+        
+        confetti({
+          particleCount: 80,
+          spread: 90,
+          origin: { y: 0.5 },
+          colors: ['#d4a339', '#fae8b4', '#1a5c4b']
+        });
+      }
+    }
+
+    // Events for mouse and touch
+    scratchCanvas.addEventListener('mousedown', (e) => { isDrawing = true; scratch(e); });
+    window.addEventListener('mousemove', scratch);
+    window.addEventListener('mouseup', () => { isDrawing = false; });
+
+    scratchCanvas.addEventListener('touchstart', (e) => { isDrawing = true; scratch(e); });
+    window.addEventListener('touchmove', scratch, { passive: false });
+    window.addEventListener('touchend', () => { isDrawing = false; });
+
+    function resetScratchCard() {
+      initScratchCard();
+    }
+
+    window.addEventListener('load', () => {
+      initScratchCard();
+    });
+
+    // 4. COUNTDOWN TIMER
     const targetWeddingDate = new Date("December 17, 2026 20:00:00").getTime();
 
     function updateCountdown() {
@@ -791,7 +1358,7 @@
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // 2. RSVP FORM SUBMISSION VIA WHATSAPP
+    // 5. RSVP SUBMISSION
     function handleRSVPSubmit(event) {
       event.preventDefault();
 
@@ -803,7 +1370,6 @@
 
       if (!name) return;
 
-      // Add to local Dua Wall immediately
       if (message) {
         const wall = document.getElementById("dua-wall");
         const newCard = document.createElement("div");
@@ -818,7 +1384,6 @@
         wall.prepend(newCard);
       }
 
-      // Format WhatsApp Message
       let waText = `*Wedding RSVP — Qureshi Family Wedding 2026*%0A%0A`;
       waText += `*Name:* ${encodeURIComponent(name)}%0A`;
       waText += `*Attending For:* ${encodeURIComponent(attendingFor)}%0A`;
@@ -835,98 +1400,19 @@
       alert("Thank you! Opening WhatsApp to send your RSVP to the host.");
     }
 
-    // 3. WHATSAPP SHARE WEBSITE LINK
+    // 6. WHATSAPP SHARE
     function shareOnWhatsApp() {
       const pageUrl = window.location.href;
-      const shareText = `🌙 *Wedding Invitation — Double the Joy, Double the Celebration!* 💍✨%0A%0AMr. Muhammad Rashid Qureshi & Mrs. Roshan Jahan cordially invite you to the wedding of their daughters:%0A%0A1. *Mr. Faheem Qureshi & Miss Zeba Naaz*%0A2. *Mr. Aamir Qureshi & Miss Sharika Falak*%0A%0A🗓️ *Dates:* 14 - 17 December 2026%0A📍 *Venue:* Hasanpur (U.P.)%0A%0AView details, timeline & RSVP on our interactive website:%0A${encodeURIComponent(pageUrl)}`;
+      const shareText = `🌙 *Wedding Invitation — Double the Joy, Double the Celebration!* 💍✨%0A%0AMr. Muhammad Rashid Qureshi & Mrs. Roshan Jahan cordially invite you to the wedding of their daughters:%0A%0A1. *Mr. Faheem Qureshi & Miss Zeba Naaz*%0A2. *Mr. Aamir Qureshi & Miss Sharika Falak*%0A%0A🗓️ *Dates:* 14 - 17 December 2026%0A📍 *Venue:* Hasanpur (U.P.)%0A%0AOpen the royal digital invitation & envelope here:%0A${encodeURIComponent(pageUrl)}`;
       window.open(`https://wa.me/?text=${shareText}`, '_blank');
     }
 
-    // 4. ADD TO GOOGLE CALENDAR
     function addToCalendar(title, startISO, endISO, location, details) {
       const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startISO}/${endISO}&details=${encodeURIComponent(details)}&location=${encodeURIComponent(location)}`;
       window.open(gcalUrl, '_blank');
     }
 
-    // 5. BACKGROUND AUDIO (HARMONIOUS WEB AUDIO SYNTH / AMBIENT WEDDING MELODY)
-    let audioCtx = null;
-    let isPlaying = false;
-    let melodyTimer = null;
-
-    const musicBtn = document.getElementById("music-btn");
-    const soundwave = document.getElementById("soundwave");
-    const mutedIcon = document.getElementById("muted-icon");
-    const musicStatusText = document.getElementById("music-status-text");
-
-    // Soothing oriental pentatonic melody notes (Hz frequencies)
-    const melody = [
-      261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 392.00, 329.63,
-      293.66, 329.63, 392.00, 440.00, 523.25, 587.33, 523.25, 440.00
-    ];
-    let noteIndex = 0;
-
-    function playNote(freq) {
-      if (!audioCtx || !isPlaying) return;
-      try {
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-
-        osc.type = "sine";
-        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-
-        // Soft attack and decay (bell / harp like tone)
-        gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.08, audioCtx.currentTime + 0.1);
-        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.6);
-
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-
-        osc.start();
-        osc.stop(audioCtx.currentTime + 1.6);
-      } catch (e) {
-        console.log(e);
-      }
-    }
-
-    function startMelodyLoop() {
-      melodyTimer = setInterval(() => {
-        if (!isPlaying) return;
-        playNote(melody[noteIndex]);
-        noteIndex = (noteIndex + 1) % melody.length;
-      }, 550);
-    }
-
-    musicBtn.addEventListener("click", () => {
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      }
-
-      if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
-      }
-
-      isPlaying = !isPlaying;
-
-      if (isPlaying) {
-        soundwave.classList.remove("hidden");
-        mutedIcon.classList.add("hidden");
-        musicStatusText.innerText = "Playing Harmony";
-        // animate bars
-        soundwave.children[0].classList.add("bar-1");
-        soundwave.children[1].classList.add("bar-2");
-        soundwave.children[2].classList.add("bar-3");
-        soundwave.children[3].classList.add("bar-4");
-        startMelodyLoop();
-      } else {
-        soundwave.classList.add("hidden");
-        mutedIcon.classList.remove("hidden");
-        musicStatusText.innerText = "Music Paused";
-        clearInterval(melodyTimer);
-      }
-    });
-
-    // 6. ROSE PETALS & GOLD SPARKLES CANVAS ANIMATION
+    // 7. GOLD PETALS EFFECT
     const canvas = document.getElementById("petals-canvas");
     const ctx = canvas.getContext("2d");
 
@@ -936,10 +1422,11 @@
     window.addEventListener("resize", () => {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
+      initScratchCard();
     });
 
     const particles = [];
-    const totalParticles = 24;
+    const totalParticles = 22;
 
     for (let i = 0; i < totalParticles; i++) {
       particles.push({
@@ -951,7 +1438,6 @@
         speedX: (Math.random() - 0.5) * 0.7,
         rotation: Math.random() * 360,
         rotationSpeed: (Math.random() - 0.5) * 2,
-        opacity: Math.random() * 0.7 + 0.3
       });
     }
 
@@ -972,7 +1458,6 @@
         ctx.translate(p.x, p.y);
         ctx.rotate((p.rotation * Math.PI) / 180);
         ctx.beginPath();
-        // Draw elegant petal shape
         ctx.ellipse(0, 0, p.radius, p.radius * 1.6, 0, 0, Math.PI * 2);
         ctx.fillStyle = p.color;
         ctx.fill();
