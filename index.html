@@ -300,124 +300,12 @@
     }
 
     /* Audio Equalizer Bar Pulse */
-    @keyframes audioPulse {
-      0%, 100% { height: 4px; }
-      50% { height: 20px; }
-    }
-    .bar-1 { animation: audioPulse 0.8s ease-in-out infinite; }
-    .bar-2 { animation: audioPulse 1.2s ease-in-out infinite 0.2s; }
-    .bar-3 { animation: audioPulse 0.9s ease-in-out infinite 0.4s; }
-    .bar-4 { animation: audioPulse 1.1s ease-in-out infinite 0.1s; }
   </style>
 </head>
 <body class="relative selection:bg-gold-500 selection:text-royal-900">
 
   <!-- Petals Floating Effect Canvas -->
   <canvas id="petals-canvas"></canvas>
-
-  <!-- FLOATING MUSIC PLAYER BUTTON -->
-  <div class="fixed bottom-6 right-6 z-50 flex items-center gap-3">
-    <div id="music-tooltip" class="hidden sm:block text-xs bg-royal-800/90 text-gold-200 px-3 py-1.5 rounded-full border border-gold-500/30 backdrop-blur shadow-lg transition-all duration-300">
-      <span id="music-status-text">BGM: Ishq Murshid</span>
-    </div>
-    <button id="music-btn" class="w-14 h-14 rounded-full bg-gradient-to-tr from-gold-600 via-gold-400 to-gold-200 p-[2px] shadow-2xl hover:scale-105 active:scale-95 transition-all">
-      <div class="w-full h-full rounded-full bg-royal-900 flex items-center justify-center relative overflow-hidden group">
-        <div id="soundwave" class="flex items-center gap-[3px] h-6">
-          <span class="w-1 bg-gold-400 rounded-full h-2 bar-1"></span>
-          <span class="w-1 bg-gold-400 rounded-full h-3 bar-2"></span>
-          <span class="w-1 bg-gold-400 rounded-full h-2 bar-3"></span>
-          <span class="w-1 bg-gold-400 rounded-full h-4 bar-4"></span>
-        </div>
-        <i data-lucide="volume-x" id="muted-icon" class="w-6 h-6 text-gold-300 hidden"></i>
-      </div>
-    </button>
-  </div>
-
-  <!-- FLOATING TOP BAR -->
-  <div class="fixed top-4 right-4 z-40 flex items-center gap-2">
-    <a href="#envelope-section" class="px-3.5 py-2 rounded-full bg-royal-800/90 border border-gold-500/40 text-gold-300 hover:text-white text-xs font-cinzel flex items-center gap-1.5 backdrop-blur transition-all shadow-md">
-      <i data-lucide="mail" class="w-3.5 h-3.5"></i>
-      <span class="hidden sm:inline">Open Envelope</span>
-    </a>
-    <a href="#rsvp" class="hidden md:inline-flex items-center gap-2 bg-gradient-to-r from-gold-500 to-gold-600 text-royal-900 font-cinzel font-bold text-xs uppercase tracking-widest px-4 py-2 rounded-full shadow-lg hover:scale-105 transition-all">
-      <i data-lucide="send" class="w-3.5 h-3.5"></i>
-      RSVP
-    </a>
-    <button onclick="shareOnWhatsApp()" class="p-2.5 rounded-full bg-royal-800/90 border border-gold-500/40 text-gold-300 hover:text-white hover:bg-gold-600/30 backdrop-blur transition-all shadow-md" title="Share via WhatsApp">
-      <i data-lucide="share-2" class="w-4 h-4"></i>
-    </button>
-  </div>
-
-  <!-- =========================================================================
-       HERO SECTION
-       ========================================================================= -->
-  <header class="min-h-screen relative flex flex-col items-center justify-center text-center px-4 py-16 overflow-hidden">
-    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-royal-700/50 via-royal-900/90 to-royal-950 pointer-events-none"></div>
-
-    <div class="relative z-10 max-w-4xl mx-auto space-y-6">
-      
-      <!-- Bismillah Calligraphy -->
-      <div class="pt-6">
-        <p class="font-amiri text-3xl md:text-5xl lg:text-6xl text-gold-300 tracking-wider mb-2 drop-shadow-[0_2px_10px_rgba(212,163,57,0.4)]">
-          بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
-        </p>
-        <p class="text-xs md:text-sm uppercase tracking-[0.25em] text-gold-400/80 font-cinzel">
-          In the Name of Allah, The Most Gracious, The Most Merciful
-        </p>
-      </div>
-
-      <!-- Islamic Verse Badge -->
-      <div class="inline-block my-2 px-6 py-2 rounded-full border border-gold-500/30 bg-royal-800/60 backdrop-blur">
-        <p class="font-amiri text-sm md:text-base italic text-gold-200">
-          "And We created you in pairs"
-        </p>
-        <span class="text-[10px] md:text-xs text-gold-400 font-cinzel tracking-widest block uppercase">— Surah An-Naba [78:8] —</span>
-      </div>
-
-      <!-- Main Headline -->
-      <div class="space-y-2 py-4">
-        <h2 class="font-cinzel text-sm md:text-lg uppercase tracking-[0.3em] text-gold-300">
-          Two Souls, Two Unions, One Celebration
-        </h2>
-        <h1 class="font-cinzelDeco text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold gold-gradient-text leading-tight drop-shadow-md">
-          Double the Joy<br>
-          <span class="font-script font-normal text-4xl sm:text-6xl md:text-7xl text-gold-200 lowercase tracking-normal">double the</span><br>
-          Celebration
-        </h1>
-      </div>
-
-      <!-- Host Invitation Note -->
-      <div class="max-w-2xl mx-auto px-4 py-4 rounded-xl border-y border-gold-500/30 bg-royal-800/40 backdrop-blur">
-        <p class="text-xs md:text-sm text-sand-100 font-light leading-relaxed">
-          With immense gratitude to Almighty Allah, we cordially invite you and your family to witness the sacred Nikah & wedding festivities of our beloved daughters
-        </p>
-        <p class="font-cinzel font-semibold text-gold-300 text-sm md:text-base mt-2 tracking-wider">
-          Mrs. Roshan Jahan & Mr. Muhammad Rashid Qureshi
-        </p>
-      </div>
-
-      <!-- Quick Date & Place Badge -->
-      <div class="flex flex-wrap items-center justify-center gap-4 text-xs md:text-sm text-gold-200 font-cinzel pt-2">
-        <span class="flex items-center gap-1.5"><i data-lucide="sparkles" class="w-4 h-4 text-gold-400"></i> Mangni: 16 Sep 2026</span>
-        <span class="hidden md:inline text-gold-500">•</span>
-        <span class="flex items-center gap-1.5"><i data-lucide="calendar" class="w-4 h-4 text-gold-400"></i> Nikah: 17 Dec 2026</span>
-        <span class="hidden md:inline text-gold-500">•</span>
-        <span class="flex items-center gap-1.5"><i data-lucide="map-pin" class="w-4 h-4 text-gold-400"></i> Hasanpur (U.P.)</span>
-      </div>
-
-      <!-- Fast Action Buttons -->
-      <div class="pt-6 flex flex-wrap justify-center gap-4">
-        <a href="#envelope-section" class="px-6 py-3 rounded-full bg-gradient-to-r from-gold-600 via-gold-500 to-gold-400 text-royal-950 font-cinzel font-bold text-xs uppercase tracking-widest shadow-[0_0_20px_rgba(212,163,57,0.4)] hover:scale-105 transition-all flex items-center gap-2">
-          <i data-lucide="mail-open" class="w-4 h-4"></i>
-          Open Royal Envelope
-        </a>
-        <a href="#scratch-section" class="px-6 py-3 rounded-full bg-royal-800/80 hover:bg-royal-700 border border-gold-400/50 text-gold-200 font-cinzel text-xs uppercase tracking-wider flex items-center gap-2 transition-all">
-          <i data-lucide="sparkle" class="w-4 h-4 text-gold-400"></i>
-          Scratch To Reveal Date
-        </a>
-      </div>
-
-    </div>
   </header>
 
 
@@ -1145,7 +1033,6 @@
       if (isEnvelopeOpen) {
         inpageEnv.classList.add("is-opened");
         envBtnText.innerText = "Close Envelope / लिफ़ाफ़ा बंद करें";
-        startMusic();
         confetti({
           particleCount: 80,
           spread: 80,
@@ -1319,74 +1206,6 @@
 
     setInterval(updateCountdown, 1000);
     updateCountdown();
-
-    // 4. AUDIO PLAYER
-    let audioCtx = null;
-    let isPlaying = false;
-    let melodyTimer = null;
-
-    const musicBtn = document.getElementById("music-btn");
-    const soundwave = document.getElementById("soundwave");
-    const mutedIcon = document.getElementById("muted-icon");
-    const musicStatusText = document.getElementById("music-status-text");
-
-    const melody = [
-      261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 392.00, 329.63,
-      293.66, 329.63, 392.00, 440.00, 523.25, 587.33, 523.25, 440.00
-    ];
-    let noteIndex = 0;
-
-    function playNote(freq) {
-      if (!audioCtx || !isPlaying) return;
-      try {
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-
-        osc.type = "sine";
-        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-
-        gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.08, audioCtx.currentTime + 0.1);
-        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.6);
-
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-
-        osc.start();
-        osc.stop(audioCtx.currentTime + 1.6);
-      } catch (e) {}
-    }
-
-    function startMusic() {
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      }
-      if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
-      }
-      isPlaying = true;
-      soundwave.classList.remove("hidden");
-      mutedIcon.classList.add("hidden");
-      musicStatusText.innerText = "BGM: Ishq Murshid";
-      if (!melodyTimer) {
-        melodyTimer = setInterval(() => {
-          if (!isPlaying) return;
-          playNote(melody[noteIndex]);
-          noteIndex = (noteIndex + 1) % melody.length;
-        }, 550);
-      }
-    }
-
-    musicBtn.addEventListener("click", () => {
-      if (isPlaying) {
-        isPlaying = false;
-        soundwave.classList.add("hidden");
-        mutedIcon.classList.remove("hidden");
-        musicStatusText.innerText = "Music Paused";
-      } else {
-        startMusic();
-      }
-    });
 
     // 5. RSVP FORM
     function handleRSVPSubmit(event) {
