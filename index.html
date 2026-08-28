@@ -398,7 +398,9 @@
 
       <!-- Quick Date & Place Badge -->
       <div class="flex flex-wrap items-center justify-center gap-4 text-xs md:text-sm text-gold-200 font-cinzel pt-2">
-        <span class="flex items-center gap-1.5"><i data-lucide="calendar" class="w-4 h-4 text-gold-400"></i> 14 — 17 December 2026</span>
+        <span class="flex items-center gap-1.5"><i data-lucide="sparkles" class="w-4 h-4 text-gold-400"></i> Mangni: 16 Sep 2026</span>
+        <span class="hidden md:inline text-gold-500">•</span>
+        <span class="flex items-center gap-1.5"><i data-lucide="calendar" class="w-4 h-4 text-gold-400"></i> Nikah: 17 Dec 2026</span>
         <span class="hidden md:inline text-gold-500">•</span>
         <span class="flex items-center gap-1.5"><i data-lucide="map-pin" class="w-4 h-4 text-gold-400"></i> Hasanpur (U.P.)</span>
       </div>
@@ -450,7 +452,7 @@
               "We request the honour of your presence at the grand wedding celebration of our beloved daughters."
             </p>
             <span class="text-[10px] sm:text-xs font-cinzel text-gold-200 mt-2 block border-t border-gold-500/30 pt-2">
-              Nikah: 17 Dec 2026 • Kamal Palace, Hasanpur
+              Mangni: 16 Sep (Rose Garden) • Nikah: 17 Dec 2026 (Kamal Palace)
             </span>
           </div>
 
@@ -765,17 +767,60 @@
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         
-        <!-- EVENT 1: MEHNDI -->
-        <div class="islamic-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between relative group">
+        <!-- EVENT 1: MANGNI CEREMONY -->
+        <div class="islamic-card rounded-3xl p-6 sm:p-7 flex flex-col justify-between relative group border-gold-500/40">
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-2xl bg-gold-500/15 border border-gold-400/40 flex items-center justify-center text-gold-300">
+              <i data-lucide="sparkles" class="w-6 h-6"></i>
+            </div>
+            
+            <div>
+              <span class="text-[10px] uppercase tracking-[0.2em] font-cinzel text-gold-400 font-semibold block">Celebration 01 • رسمِ منگنی</span>
+              <h3 class="font-cinzel text-2xl font-bold text-sand-50 mt-1">Mangni Ceremony</h3>
+              <p class="text-xs text-sand-200 mt-1">The auspicious ring exchange, heartfelt promises & family blessings.</p>
+            </div>
+
+            <div class="space-y-2 pt-2 border-t border-gold-500/20 text-xs text-sand-100">
+              <div class="flex items-start gap-2">
+                <i data-lucide="calendar" class="w-4 h-4 text-gold-400 shrink-0 mt-0.5"></i>
+                <div>
+                  <strong class="text-gold-200 block">Wednesday, 16 Sep 2026</strong>
+                  <span>9:00 PM Sharp</span>
+                </div>
+              </div>
+              <div class="flex items-start gap-2 pt-2">
+                <i data-lucide="map-pin" class="w-4 h-4 text-gold-400 shrink-0 mt-0.5"></i>
+                <div>
+                  <strong class="text-gold-200 block">Venue:</strong>
+                  <span class="font-medium text-gold-100">Rose Garden</span>, Hasanpur (U.P.)
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-gold-500/20 flex flex-col gap-2">
+            <a href="https://www.google.com/maps/search/?api=1&query=Rose+Garden+Hasanpur" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-royal-800 hover:bg-gold-500/20 border border-gold-500/30 text-gold-300 text-xs font-cinzel font-semibold flex items-center justify-center gap-2 transition-all">
+              <i data-lucide="navigation" class="w-3.5 h-3.5"></i>
+              Directions to Rose Garden
+            </a>
+            <button onclick="addToCalendar('Mangni Ceremony - Faheem & Zeba / Aamir & Sharika', '20260916T210000', '20260916T235900', 'Rose Garden Hasanpur', 'Mangni Ceremony of Faheem & Zeba and Aamir & Sharika')" class="w-full py-2 px-4 rounded-xl text-gold-400 hover:text-gold-200 text-[11px] font-cinzel flex items-center justify-center gap-1.5 transition-all">
+              <i data-lucide="calendar-plus" class="w-3.5 h-3.5"></i>
+              Add to Calendar
+            </button>
+          </div>
+        </div>
+
+        <!-- EVENT 2: MEHNDI -->
+        <div class="islamic-card rounded-3xl p-6 sm:p-7 flex flex-col justify-between relative group">
           <div class="space-y-4">
             <div class="w-12 h-12 rounded-2xl bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400">
               <i data-lucide="flower" class="w-6 h-6"></i>
             </div>
             
             <div>
-              <span class="text-[10px] uppercase tracking-[0.2em] font-cinzel text-gold-400 font-semibold block">Celebration 01</span>
+              <span class="text-[10px] uppercase tracking-[0.2em] font-cinzel text-gold-400 font-semibold block">Celebration 02 • مہندی</span>
               <h3 class="font-cinzel text-2xl font-bold text-sand-50 mt-1">Mehndi Night</h3>
               <p class="text-xs text-sand-200 mt-1">An evening of henna, melodious songs, and cherished smiles.</p>
             </div>
@@ -792,7 +837,7 @@
                 <i data-lucide="map-pin" class="w-4 h-4 text-gold-400 shrink-0 mt-0.5"></i>
                 <div>
                   <strong class="text-gold-200 block">Venue:</strong>
-                  <span>Qureshiyaan Mohallah, Hasanpur (U.P.)</span>
+                  <span>Qureshiyaan Mohallah, Hasanpur</span>
                 </div>
               </div>
             </div>
@@ -810,15 +855,15 @@
           </div>
         </div>
 
-        <!-- EVENT 2: MANDHA FUNCTION -->
-        <div class="islamic-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between relative group">
+        <!-- EVENT 3: MANDHA FUNCTION -->
+        <div class="islamic-card rounded-3xl p-6 sm:p-7 flex flex-col justify-between relative group">
           <div class="space-y-4">
             <div class="w-12 h-12 rounded-2xl bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400">
-              <i data-lucide="sparkles" class="w-6 h-6"></i>
+              <i data-lucide="sun" class="w-6 h-6"></i>
             </div>
             
             <div>
-              <span class="text-[10px] uppercase tracking-[0.2em] font-cinzel text-gold-400 font-semibold block">Celebration 02</span>
+              <span class="text-[10px] uppercase tracking-[0.2em] font-cinzel text-gold-400 font-semibold block">Celebration 03 • مانڈھا</span>
               <h3 class="font-cinzel text-2xl font-bold text-sand-50 mt-1">Mandha Function</h3>
               <p class="text-xs text-sand-200 mt-1">Traditional blessings, prayers, and family get-together.</p>
             </div>
@@ -835,7 +880,7 @@
                 <i data-lucide="map-pin" class="w-4 h-4 text-gold-400 shrink-0 mt-0.5"></i>
                 <div>
                   <strong class="text-gold-200 block">Venue:</strong>
-                  <span>Qureshiyaan Mohallah, Hasanpur (U.P.)</span>
+                  <span>Qureshiyaan Mohallah, Hasanpur</span>
                 </div>
               </div>
             </div>
@@ -853,10 +898,10 @@
           </div>
         </div>
 
-        <!-- EVENT 3: THE DAY OF BLESSINGS (NIKAH) -->
-        <div class="islamic-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between relative group border-gold-400/60 shadow-[0_0_25px_rgba(212,163,57,0.2)]">
-          <div class="absolute -top-3 right-6 bg-gradient-to-r from-gold-500 to-gold-400 text-royal-900 font-cinzel font-bold text-[10px] uppercase px-3 py-1 rounded-full shadow-md">
-            Main Ceremony
+        <!-- EVENT 4: THE DAY OF BLESSINGS (NIKAH) -->
+        <div class="islamic-card rounded-3xl p-6 sm:p-7 flex flex-col justify-between relative group border-gold-400/60 shadow-[0_0_25px_rgba(212,163,57,0.25)]">
+          <div class="absolute -top-3 right-5 bg-gradient-to-r from-gold-500 to-gold-400 text-royal-900 font-cinzel font-bold text-[9px] uppercase px-3 py-1 rounded-full shadow-md">
+            Grand Nikah
           </div>
 
           <div class="space-y-4">
@@ -865,7 +910,7 @@
             </div>
             
             <div>
-              <span class="text-[10px] uppercase tracking-[0.2em] font-cinzel text-gold-300 font-semibold block">The Grand Event</span>
+              <span class="text-[10px] uppercase tracking-[0.2em] font-cinzel text-gold-300 font-semibold block">Celebration 04 • نِكَاح</span>
               <h3 class="font-cinzel text-2xl font-bold gold-gradient-text mt-1">The Day Of Blessings</h3>
               <p class="text-xs text-sand-200 mt-1">The Sacred Nikah Ceremony followed by Royal Feast & Walima.</p>
             </div>
@@ -882,7 +927,7 @@
                 <i data-lucide="map-pin" class="w-4 h-4 text-gold-400 shrink-0 mt-0.5"></i>
                 <div>
                   <strong class="text-gold-200 block">Venue:</strong>
-                  <span class="font-medium text-gold-100">Kamal Palace</span>, Hasanpur (U.P.)
+                  <span class="font-medium text-gold-100">Kamal Palace</span>, Hasanpur
                 </div>
               </div>
             </div>
@@ -891,7 +936,7 @@
           <div class="mt-6 pt-4 border-t border-gold-500/20 flex flex-col gap-2">
             <a href="https://www.google.com/maps/search/?api=1&query=Kamal+Palace+Hasanpur" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-gold-600 via-gold-500 to-gold-400 text-royal-900 text-xs font-cinzel font-bold flex items-center justify-center gap-2 shadow-lg hover:shadow-gold-500/40 hover:scale-[1.02] transition-all">
               <i data-lucide="navigation" class="w-3.5 h-3.5"></i>
-              Get Directions to Kamal Palace
+              Directions to Kamal Palace
             </a>
             <button onclick="addToCalendar('The Day Of Blessings (Nikah) - Faheem & Zeba / Aamir & Sharika', '20261217T200000', '20261217T235900', 'Kamal Palace Hasanpur', 'Grand Nikah Ceremony of Faheem & Zeba and Aamir & Sharika')" class="w-full py-2 px-4 rounded-xl text-gold-400 hover:text-gold-200 text-[11px] font-cinzel flex items-center justify-center gap-1.5 transition-all">
               <i data-lucide="calendar-plus" class="w-3.5 h-3.5"></i>
@@ -901,7 +946,6 @@
         </div>
 
       </div>
-
     </div>
   </section>
 
@@ -976,15 +1020,28 @@
             </div>
           </div>
 
-          <div>
-            <label class="block font-cinzel text-xs uppercase tracking-widest text-gold-300 mb-2">
-              Attending For *
-            </label>
-            <select id="attending-for" class="w-full px-4 py-3 rounded-xl bg-royal-900/90 border border-gold-500/30 text-sand-100 text-sm focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-all">
-              <option value="Both Couples (Dono Couples - Grand Celebration)" selected>Both Blessed Couples (Faheem & Zeba + Aamir & Sharika)</option>
-              <option value="Couple 1 (Faheem & Zeba)">Couple 1: Faheem & Zeba</option>
-              <option value="Couple 2 (Aamir & Sharika)">Couple 2: Aamir & Sharika</option>
-            </select>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block font-cinzel text-xs uppercase tracking-widest text-gold-300 mb-2">
+                Attending For *
+              </label>
+              <select id="attending-for" class="w-full px-4 py-3 rounded-xl bg-royal-900/90 border border-gold-500/30 text-sand-100 text-sm focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-all">
+                <option value="Both Couples (Dono Couples - Grand Celebration)" selected>Both Couples (Faheem & Zeba + Aamir & Sharika)</option>
+                <option value="Couple 1 (Faheem & Zeba)">Couple 1: Faheem & Zeba</option>
+                <option value="Couple 2 (Aamir & Sharika)">Couple 2: Aamir & Sharika</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block font-cinzel text-xs uppercase tracking-widest text-gold-300 mb-2">
+                Functions You Will Attend *
+              </label>
+              <select id="attending-functions" class="w-full px-4 py-3 rounded-xl bg-royal-900/90 border border-gold-500/30 text-sand-100 text-sm focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-all">
+                <option value="All Functions (Mangni + All Wedding Events)" selected>All Functions (Mangni & Wedding)</option>
+                <option value="Mangni Ceremony Only (16 Sep, Rose Garden)">Mangni Ceremony Only (16 Sep)</option>
+                <option value="Wedding Festivities Only (14 - 17 Dec)">Wedding Festivities Only (14-17 Dec)</option>
+              </select>
+            </div>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -1338,6 +1395,7 @@
 
       const name = document.getElementById("guest-name").value.trim();
       const attendingFor = document.getElementById("attending-for").value;
+      const functions = document.getElementById("attending-functions").value;
       const status = document.getElementById("attendance-status").value;
       const count = document.getElementById("guest-count").value;
       const message = document.getElementById("guest-message").value.trim();
@@ -1361,6 +1419,7 @@
       let waText = `*Wedding RSVP — Qureshi Family Wedding 2026*%0A%0A`;
       waText += `*Name:* ${encodeURIComponent(name)}%0A`;
       waText += `*Attending For:* ${encodeURIComponent(attendingFor)}%0A`;
+      waText += `*Functions:* ${encodeURIComponent(functions)}%0A`;
       waText += `*Status:* ${encodeURIComponent(status)}%0A`;
       waText += `*Guest Count:* ${encodeURIComponent(count)}%0A`;
       if (message) {
@@ -1376,7 +1435,7 @@
 
     function shareOnWhatsApp() {
       const pageUrl = window.location.href;
-      const shareText = `🌙 *Wedding Invitation — Double the Joy, Double the Celebration!* 💍✨%0A%0AMr. Muhammad Rashid Qureshi & Mrs. Roshan Jahan cordially invite you to the wedding of their daughters:%0A%0A1. *Mr. Faheem Qureshi & Miss Zeba Naaz*%0A2. *Mr. Aamir Qureshi & Miss Sharika Falak*%0A%0A🗓️ *Dates:* 14 - 17 December 2026%0A📍 *Venue:* Hasanpur (U.P.)%0A%0AOpen the royal digital invitation, envelope & scratch card here:%0A${encodeURIComponent(pageUrl)}`;
+      const shareText = `🌙 *Wedding Invitation — Double the Joy, Double the Celebration!* 💍✨%0A%0AMr. Muhammad Rashid Qureshi & Mrs. Roshan Jahan cordially invite you to the wedding of their daughters:%0A%0A1. *Mr. Faheem Qureshi & Miss Zeba Naaz*%0A2. *Mr. Aamir Qureshi & Miss Sharika Falak*%0A%0A🗓️ *Mangni Ceremony:* 16 Sep 2026 (9:00 PM at Rose Garden)%0A🗓️ *Wedding Festivities:* 14 - 17 Dec 2026%0A📍 *Venue:* Hasanpur (U.P.)%0A%0AOpen the royal digital invitation, envelope & scratch card here:%0A${encodeURIComponent(pageUrl)}`;
       window.open(`https://wa.me/?text=${shareText}`, '_blank');
     }
 
